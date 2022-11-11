@@ -1,4 +1,7 @@
 import { useState } from "react"
+//原文: https://overreacted.io/before-you-memo/
+
+
 //方式一 App,ExpensiveTree都多次渲染
 // export default function App() {
 //   let [color, setColor] = useState("red")
@@ -51,9 +54,7 @@ function ColorContainer({ expensiveTreeNode }) {
   return (
     <div style={{ color }}>
       <input value={color} onChange={e => setColor(e.target.value)} />
-      11
       {expensiveTreeNode}
-      22
       <p style={{ color }}>Hello, world!</p>
     </div>
   )

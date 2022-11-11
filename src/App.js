@@ -6,20 +6,63 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />
-      <Route path="about" element={<About />} />
-      <Route path="dashboard" element={<Dashboard />} />
-      {/* Using path="*"" means "match anything", so this route
-      acts like a catch-all for URLs that we don't have explicit
-      routes for. */}
-      <Route path="*" element={<NoMatch />} />
-    </Route>
-  )
-);
+import SetState18 from './pages/setState-18'
+import SetState from './pages/setState'
+import BeforeYouMemo from './pages/beforeYouMemo'
+import Memo from './pages/memo'
+import Demanhook from './pages/demanhook'
+import Basic ,{routeConfig} from './pages/basic'
 
+console.info(' routeConfig:',routeConfig);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <NoMatch />,
+    children: [
+      {
+        path: "basic",
+        element: <Basic />,
+        children: routeConfig,
+      },
+      {
+        path: "setState-18",
+        element: <SetState18 />,
+      },
+      {
+        path: "setState",
+        element: <SetState />,
+      },
+      {
+        path: "beforeyoumemo",
+        element: <BeforeYouMemo />,
+      },
+      {
+        path: "memo",
+        element: <Memo />,
+      },
+      {
+        path: "demanhook",
+        element: <Demanhook />,
+      },
+    ],
+  },
+]);
+
+// const router = createBrowserRouter(
+//   createRoutesFromElements(
+//     <Route path="/" element={<Layout />}>
+//       <Route index element={<Home />} />
+//       <Route path="basic" element={<Basic />} />
+//       <Route path="setState-18" element={<SetState18 />} />
+//       <Route path="setState" element={<SetState />} />
+//       <Route path="beforeyoumemo" element={<BeforeYouMemo />} />
+//       <Route path="memo" element={<Memo />} />
+//       <Route path="demanhook" element={<Demanhook />} />
+//       <Route path="*" element={<NoMatch />} />
+//     </Route>
+//   )
+// );
 
 export default function App() {
   return (
@@ -33,54 +76,35 @@ export default function App() {
 function Layout() {
   return (
     <>
-      {/* A "layout route" is a good place to put markup you want to
-          share across all the pages on your site, like navigation. */}
-      <nav>
+      <p className="pd10">
+        <b>demo演示</b>
+      </p>
+      <nav className="nav">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/basic">basic demo</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/setState-18">setState react 18</Link>
           </li>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/setState">setState是同步还是异步</Link>
           </li>
           <li>
-            <Link to="/nothing-here">Nothing Here</Link>
+            <Link to="/beforeyoumemo">状态下放，缩小状态影响范围状态下放</Link>
+          </li>
+          <li>
+            <Link to="/memo">memo+useCallback</Link>
+          </li>
+          <li>
+            <Link to="/demanhook">按需加载hook</Link>
           </li>
         </ul>
       </nav>
-      <hr />
-      {/* An <Outlet> renders whatever child route is currently active,
-          so you can think about this <Outlet> as a placeholder for
-          the child routes we defined above. */}
-      <Outlet />
+      <section className="main">
+        <Outlet />
+      </section>
     </>
-  );
-}
-
-function Home() {
-  return (
-    <div className="home">
-      <h2>Home</h2>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div className="about">
-      <h2>About</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div className="dashboard">
-      <h2>Dashboard</h2>
-    </div>
   );
 }
 

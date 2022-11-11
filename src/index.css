@@ -5,9 +5,134 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+div,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+.app-demo {
+  padding: 10px;
+  padding-left: 20em;
+}
+
+.main {
+  padding: 10px;
+}
+
+.nav {
+  width: 20em;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-right: 1px solid #ccc;
+}
+
+.nav li {
+  padding: 0px;
+  margin: 10px 20px;
+  list-style: disc;
+}
+
+.pd10 {
+  padding: 10px;
+}
+
+fieldset:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+legend {
+  color: #646cff;
+}
+
+.basic-nav {
+  list-style: none;
+  color: #1458e1;
+}
+
+.basic-nav a {
+  color: #1458e1;
+  text-decoration: none;
+}
+
+.code-wrap pre {
+  line-height: 1.625;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: 1.5rem 0;
+  border-radius: .5rem;
+  color: #515151;
+  background-color: #f7f7f7;
+  outline: none;
+}
+
+code {
+  font-size: 90%;
+}
+
+code i {
+ font-style: normal;
+}
+
+.code-wrap span {
+  display: block;
+  padding: 0 1rem;
+  position: relative;
+  line-height: 2;
+}
+
+.code-wrap .output{
+  margin-left: 1rem;
+}
+
+.q:after {
+  content: '';
+  background-color: rgb(48 186 45);
+  content: " ";
+  left: 0;
+  opacity: .1;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.code-wrap{
+  position: relative;
+}
+
+.code-wrap .opetator-area{
+  position: absolute;
+  right: .5rem;
+  top: .4rem;
+  height: 20px;
+  line-height: 20px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.code-wrap .exec-code{
+  padding-left: 20px;
+  margin-right: 10px;
+  height: 100%;
+  background-size: 16px;
+  background: url("https://codesandbox.io/public/vscode33/vs/codesandbox/services/codesandbox/assets/preview.svg") left center no-repeat;
+}
+.code-wrap .exec-code:hover{
+  color: #dfab5c;
+}
+
+[contenteditable]:focus {
+  outline: 0px solid transparent;
 }
