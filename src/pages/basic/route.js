@@ -8,7 +8,7 @@ const genConfig = function () {
         {
             path: "Operator",
             element: <Operator />,
-            title: '操作费相关运算'
+            title: '操作运算符相关'
         }, {
             path: "Apply",
             element: <Apply />,

@@ -1,6 +1,21 @@
-import { Component, useState } from "react";
+import { Component, useState,useMemo ,useCallback} from "react";
 
 export default function App() {
+    const a = 1;
+    const b = 2;
+
+    const memoizedValue = useMemo(() => function testa(){
+        return a+b
+    }, [a, b]);
+
+
+    const memoizedValue2 = useCallback(() => function testb(){
+        return a+b
+    }, [a, b]);
+    window.aa = memoizedValue;
+    window.bb = memoizedValue2;
+    console.info(' memoizedValue:',memoizedValue);
+    console.info(' memoizedValue2:',memoizedValue2);
     return (
       <div className="app">
         <ClassComponent />
