@@ -61,7 +61,7 @@ class ClassComponentA extends Component {
         <div style={{ margin: "20px 0" }}>
           下次 componentDid 中是否执行耗时代码：
           {value % 2 ? "是" : "否"}
-          <R></R>
+          <Demo></Demo>
         </div>
         <button onClick={() => this.clickUpdateBtn()}>点我更新</button>
       </fieldset>
@@ -89,7 +89,7 @@ function FunctionComponentB() {
       <div style={{ margin: "20px 0" }}>
         下次 useLayoutEffect 中是否执行耗时代码：
         {value % 2 ? "否" : "是"}
-        <Demo></Demo>
+        <R></R>
       </div>
       <button onClick={clickUpdateBtn}>点我更新</button>
     </fieldset>

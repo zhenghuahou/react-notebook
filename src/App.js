@@ -14,7 +14,7 @@ import Memo from './pages/memo'
 import Demanhook from './pages/demanhook'
 import Basic, { routeConfig } from './pages/basic'
 
-console.info(' routeConfig:', routeConfig);
+// console.info(' routeConfig:', routeConfig);
 const router = createBrowserRouter([
   {
     path: "/",

@@ -21,6 +21,15 @@ li {
   padding: 0;
 }
 
+button{
+ appearance: none;
+ border: none;
+}
+
+.tc{
+  text-align: center;
+}
+
 .app-demo {
   padding: 10px;
   padding-left: 20em;
@@ -73,8 +82,8 @@ legend {
   margin-top: 1rem;
   padding: 1.5rem 0;
   border-radius: .5rem;
-  color: #515151;
-  background-color: #f7f7f7;
+  color: #dfe2e7;
+  /* background-color: #f7f7f7; */
   outline: none;
 }
 
@@ -86,6 +95,10 @@ code i {
  font-style: normal;
 }
 
+.code-wrap{
+  background-color: rgb(28, 32, 34);
+}
+
 .code-wrap span {
   display: block;
   padding: 0 1rem;
@@ -95,6 +108,7 @@ code i {
 
 .code-wrap .output{
   margin-left: 1rem;
+  color: #757575;
 }
 
 .q:after {
@@ -110,6 +124,7 @@ code i {
 }
 
 .code-wrap{
+  border-radius:5px;
   position: relative;
 }
 
@@ -119,10 +134,11 @@ code i {
   top: .4rem;
   height: 20px;
   line-height: 20px;
-  cursor: pointer;
   font-size: 14px;
 }
 .code-wrap .exec-code{
+  color: #86d9ca;
+  cursor: pointer;
   padding-left: 20px;
   margin-right: 10px;
   height: 100%;
