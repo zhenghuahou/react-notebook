@@ -133,6 +133,10 @@ code i {
   color: #dfab5c;
 }
 
+.code{
+  border-radius: 5px;
+}
+
 [contenteditable]:focus {
   outline: 0px solid transparent;
 }
