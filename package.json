@@ -14,7 +14,8 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4",
-    "xpath": "0.0.32"
+    "xpath": "0.0.32",
+    "scheduler": "0.20.1"
   },
   "scripts": {
     "start": "react-scripts start",

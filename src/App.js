@@ -1,19 +1,20 @@
 import * as React from "react";
 import {
-  Outlet, Link, Route,
+  Outlet, Link,
   createBrowserRouter,
   RouterProvider,
-  createRoutesFromElements,
 } from "react-router-dom";
 
 import SetState18 from './pages/setState-18'
+import Profiler from './pages/profiler'
+import UseLayoutEffect from './pages/useLayoutEffect'
 import SetState from './pages/setState'
 import BeforeYouMemo from './pages/beforeYouMemo'
 import Memo from './pages/memo'
 import Demanhook from './pages/demanhook'
-import Basic ,{routeConfig} from './pages/basic'
+import Basic, { routeConfig } from './pages/basic'
 
-console.info(' routeConfig:',routeConfig);
+console.info(' routeConfig:', routeConfig);
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,14 @@ const router = createBrowserRouter([
         path: "basic",
         element: <Basic />,
         children: routeConfig,
+      },
+      {
+        path: "profiler",
+        element: <Profiler />,
+      },
+      {
+        path: "useLayoutEffect",
+        element: <UseLayoutEffect />,
       },
       {
         path: "setState-18",
@@ -83,6 +92,12 @@ function Layout() {
         <ul>
           <li>
             <Link to="/basic">basic demo</Link>
+          </li>
+          <li>
+            <Link to="/useLayoutEffect">react useLayoutEffect</Link>
+          </li>
+          <li>
+            <Link to="/profiler">react profiler</Link>
           </li>
           <li>
             <Link to="/setState-18">setState react 18</Link>
