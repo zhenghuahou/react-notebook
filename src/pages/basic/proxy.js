@@ -1,4 +1,4 @@
-import Code from '../components/code';
+import Code from '../../components/code';
 
 var obj = new Proxy({}, {
   get: function (target, propKey, receiver) {
