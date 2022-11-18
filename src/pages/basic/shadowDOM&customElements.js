@@ -25,10 +25,11 @@ import Highlight from '../../components/highlight';
 class MyWebComponent extends HTMLElement {
   constructor() {
     super();
+    window.myweb = this;
     window.test = this.attachShadow({ mode: "closed" });
     this._root = window.test;
-    window.myweb = this;
     console.info(' this:', this)
+    //myweb._root === test // true
   }
   connectedCallback() {
     this._root.innerHTML = `
