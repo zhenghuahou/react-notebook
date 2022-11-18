@@ -13,65 +13,65 @@ import BeforeYouMemo from './pages/beforeYouMemo'
 import Memo from './pages/memo'
 import Demanhook from './pages/demanhook'
 import Basic, { routeConfig } from './pages/basic'
+import Program, { routeConfig as ProgramRouteConfig } from './pages/program'
 
-// console.info(' routeConfig:', routeConfig);
+const routerCfg = [
+  {
+    path: "basic",
+    element: <Basic />,
+    title: 'basic demo',
+    children: routeConfig,
+  },
+  {
+    path: "programming",
+    element: <Program />,
+    title: '编程案例',
+    children: ProgramRouteConfig,
+  },
+  {
+    path: "profiler",
+    title: 'react profiler',
+    element: <Profiler />,
+  },
+  {
+    path: "useLayoutEffect",
+    title:'useLayoutEffect',
+    element: <UseLayoutEffect />,
+  },
+  {
+    path: "setState-18",
+    title: 'setState with react v18',
+    element: <SetState18 />,
+  },
+  {
+    path: "setState",
+    title: 'setState是同步还是异步',
+    element: <SetState />,
+  },
+  {
+    path: "beforeyoumemo",
+    title: '状态下放，缩小状态影响范围状态下放',
+    element: <BeforeYouMemo />,
+  },
+  {
+    path: "memo",
+    title: 'memo+useCallback',
+    element: <Memo />,
+  },
+  {
+    path: "demanhook",
+    title: '按需加载hook',
+    element: <Demanhook />,
+  },
+];
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     errorElement: <NoMatch />,
-    children: [
-      {
-        path: "basic",
-        element: <Basic />,
-        children: routeConfig,
-      },
-      {
-        path: "profiler",
-        element: <Profiler />,
-      },
-      {
-        path: "useLayoutEffect",
-        element: <UseLayoutEffect />,
-      },
-      {
-        path: "setState-18",
-        element: <SetState18 />,
-      },
-      {
-        path: "setState",
-        element: <SetState />,
-      },
-      {
-        path: "beforeyoumemo",
-        element: <BeforeYouMemo />,
-      },
-      {
-        path: "memo",
-        element: <Memo />,
-      },
-      {
-        path: "demanhook",
-        element: <Demanhook />,
-      },
-    ],
+    children: routerCfg,
   },
 ]);
-
-// const router = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path="/" element={<Layout />}>
-//       <Route index element={<Home />} />
-//       <Route path="basic" element={<Basic />} />
-//       <Route path="setState-18" element={<SetState18 />} />
-//       <Route path="setState" element={<SetState />} />
-//       <Route path="beforeyoumemo" element={<BeforeYouMemo />} />
-//       <Route path="memo" element={<Memo />} />
-//       <Route path="demanhook" element={<Demanhook />} />
-//       <Route path="*" element={<NoMatch />} />
-//     </Route>
-//   )
-// );
 
 export default function App() {
   return (
@@ -89,32 +89,12 @@ function Layout() {
         <b>demo演示</b>
       </p>
       <nav className="nav">
-        <ul>
-          <li>
-            <Link to="/basic">basic demo</Link>
-          </li>
-          <li>
-            <Link to="/useLayoutEffect">react useLayoutEffect</Link>
-          </li>
-          <li>
-            <Link to="/profiler">react profiler</Link>
-          </li>
-          <li>
-            <Link to="/setState-18">setState react 18</Link>
-          </li>
-          <li>
-            <Link to="/setState">setState是同步还是异步</Link>
-          </li>
-          <li>
-            <Link to="/beforeyoumemo">状态下放，缩小状态影响范围状态下放</Link>
-          </li>
-          <li>
-            <Link to="/memo">memo+useCallback</Link>
-          </li>
-          <li>
-            <Link to="/demanhook">按需加载hook</Link>
-          </li>
-        </ul>
+        {routerCfg.map(r => {
+          const {path,title} = r;
+          return (<li  key={path}>
+            <Link to={path}>{title}</Link>
+          </li>)
+        })}
       </nav>
       <section className="main">
         <Outlet />
