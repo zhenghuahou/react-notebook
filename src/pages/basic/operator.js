@@ -16,6 +16,8 @@ export default function Operator() {
     })
   }
 
+  const code =  `({} == {})`
+
   return (
     <>
       <p>
@@ -35,9 +37,17 @@ export default function Operator() {
           }}>隐藏执行结果</button>
         </div>
         <pre>
-          <code suppressContentEditableWarning={true} contentEditable={true}>
-            <span className="code">
+          <code suppressContentEditableWarning={true} >
+          <span className="code">
+              <i className="input">NaN == NaN</i>
+              <i className="output"></i>
+            </span>
+            <span className="code q">
               <i className="input">NaN === NaN</i>
+              <i className="output"></i>
+            </span>
+            <span className="code">
+              <i className="input">/a/ == /a/</i>
               <i className="output"></i>
             </span>
             <span className="code q">
@@ -49,7 +59,37 @@ export default function Operator() {
               <i className="output"></i>
             </span>
             <span className="code q">
-              <i className="input"> Object.is(+0,-0)</i>
+              <i className="input">Object.is(+0,-0)</i>
+              <i className="output"></i>
+            </span>
+            <span className="code">
+              <i className="input"> 
+              new String('1') == '1'
+              </i>
+              <i className="output"></i>
+            </span>
+            <span className="code q">
+              <i className="input"> 
+              new String('1') === '1'
+              </i>
+              <i className="output"></i>
+            </span>
+            <span className="code">
+              <i className="input"> 
+              null === null
+              </i>
+              <i className="output"></i>
+            </span>
+            <span className="code q">
+              <i className="input"> 
+              undefined === undefined
+              </i>
+              <i className="output"></i>
+            </span>
+            <span className="code">
+              <i className="input"> 
+             {code}
+              </i>
               <i className="output"></i>
             </span>
           </code>
