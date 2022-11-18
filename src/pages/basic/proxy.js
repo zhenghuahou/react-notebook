@@ -2,11 +2,11 @@ import Code from '../../components/code';
 
 var obj = new Proxy({}, {
   get: function (target, propKey, receiver) {
-    console.info(`getting ${propKey}!`, arguments);
+    console.info(`proxy getting ${propKey}!`, arguments);
     return Reflect.get(target, propKey, receiver);
   },
   set: function (target, propKey, value, receiver) {
-    console.info(`setting ${propKey}!`, arguments);
+    console.info(`proxy setting ${propKey}!`, arguments);
     return Reflect.set(target, propKey, value, receiver);
   }
 });
@@ -15,7 +15,6 @@ obj.name = 'test'
 window.proxyObj = obj;
 
 export default function ProxyDemo() {
-
   return (
     <>
       <p className='tc'>

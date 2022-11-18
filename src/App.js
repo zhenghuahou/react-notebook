@@ -19,7 +19,7 @@ const routerCfg = [
   {
     path: "basic",
     element: <Basic />,
-    title: 'basic demo',
+    title: 'basic',
     children: routeConfig,
   },
   {
