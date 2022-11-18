@@ -44,6 +44,7 @@ export default function ArrayToRemoveDuplicates() {
   `
   return (
     <>
+      <a href='https://github.com/mqyqingfeng/Blog/issues/27'>原文</a>
       <p>
         数组去重(ES6 set方法)
       </p>

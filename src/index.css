@@ -26,6 +26,10 @@ button{
  border: none;
 }
 
+a{
+  color:#008b71
+}
+
 .tc{
   text-align: center;
 }
