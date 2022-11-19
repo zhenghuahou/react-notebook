@@ -14,6 +14,7 @@ import Memo from './pages/memo'
 import Demanhook from './pages/demanhook'
 import Basic, { routeConfig } from './pages/basic'
 import Program, { routeConfig as ProgramRouteConfig } from './pages/program'
+import Algorithm, { routeConfig as AlgorithmRouteConfig } from './pages/algorithm'
 
 const routerCfg = [
   {
@@ -27,6 +28,12 @@ const routerCfg = [
     element: <Program />,
     title: '编程案例',
     children: ProgramRouteConfig,
+  },
+  {
+    path: "algorithm",
+    element: <Algorithm />,
+    title: '算法',
+    children: AlgorithmRouteConfig,
   },
   {
     path: "profiler",
