@@ -12,12 +12,12 @@ export default function ArrayFlat() {
     let p = 0;
     let q = 0;
     let r = 1;
-    // 0 1 1 2 3 5
+    // 0 1 1 2 3 5 8 13
     for (i = 2; i <= n; i++) {
       p = q;
       q = r;
       r = p + q;
-      // console.info('i=',i, 'p,q,r',p,q,r)
+      // console.info('i=', i, 'p, q, r', p, q, r)
     }
   
     return r;
