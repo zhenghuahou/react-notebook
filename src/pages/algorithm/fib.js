@@ -30,7 +30,7 @@ export default function ArrayFlat() {
       <a href='https://leetcode.cn/problems/fibonacci-number/solutions/545049/fei-bo-na-qi-shu-by-leetcode-solution-o4ze/'>参考网址</a>
       <hr />
       <h3>解题思路:动态规划</h3>
-      <img src="https://assets.leetcode-cn.com/solution-static/509/509_fig1.gif" alt="fig1"></img>
+      <img src="https://assets.leetcode-cn.com/solution-static/509/509_fig1.gif" alt="fib"></img>
       <Highlight className="code">
         {code}
       </Highlight>
