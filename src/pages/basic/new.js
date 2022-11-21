@@ -5,6 +5,7 @@ export default function New() {
   function createObj(fn, ...args) {
     let newInstance = Object.create(fn.prototype);
     let result = fn.apply(newInstance, args)
+    // typeof function (){} // 'function'
     // return typeof result !== 'object' ? newInstance : result
     return result instanceof  Object ?  result : newInstance
   }

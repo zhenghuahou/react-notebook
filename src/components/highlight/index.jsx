@@ -5,8 +5,6 @@ import 'highlight.js/styles/atom-one-dark-reasonable.css';
 
 hljs.registerLanguage('javascript', javascript);
 
-console.info(' 我不会注册多次')
-
 export default function ArrayToRemoveDuplicates(props) {
   const { children, className, innerHTML = false, ...rest } = props;
   const cns = `code ${className}`
