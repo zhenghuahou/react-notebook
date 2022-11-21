@@ -1,6 +1,7 @@
 import Operator from './operator'
 import Apply from './apply&call'
 import New from './new'
+import ObjectCreate from './objectCreate'
 import Proxy from './proxy'
 import ShadowDOM from './shadowDOM'
 import ShadowDOMCustomElements from './shadowDOM&customElements'
@@ -15,7 +16,13 @@ const genConfig = function () {
       path: "Apply",
       element: <Apply />,
       title: 'apply与call'
-    }, {
+    },
+    {
+      path: "Object.create",
+      element: <ObjectCreate />,
+      title: 'Object.create'
+    },
+     {
       path: "New",
       element: <New />,
       title: 'new操作符'
