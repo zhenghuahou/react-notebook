@@ -4,6 +4,7 @@ import Sqrt from './sqrt'
 import InvertTree from './invertTree'
 import QuickSort from './quicksort'
 import FindKthLargest from './findKthLargest'
+import ReverseList from './reverseList'
 
 const genConfig = function () {
   const config = [
@@ -31,6 +32,11 @@ const genConfig = function () {
       path: "quickSort",
       element: <QuickSort />,
       title: '快速排序'
+    },
+    {
+      path: "reverseList",
+      element: <ReverseList />,
+      title: '反转链表'
     },
     {
       path: "findKthLargest",
