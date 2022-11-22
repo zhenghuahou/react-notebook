@@ -36,7 +36,7 @@ export default function ArrayFlat() {
     <>
       <a href='https://leetcode.cn/problems/invert-binary-tree/solutions/73159/dong-hua-yan-shi-liang-chong-shi-xian-226-fan-zhua/'>详细解题网址</a>
       <img alt='invertTree'
-       src='https://pic.leetcode-cn.com/0f91f7cbf5740de86e881eb7427c6c3993f4eca3624ca275d71e21c5e3e2c550-226_2.gif'/>
+        src='https://pic.leetcode-cn.com/0f91f7cbf5740de86e881eb7427c6c3993f4eca3624ca275d71e21c5e3e2c550-226_2.gif' />
       <hr />
       <h3>翻转二叉树</h3>
       <p>时间复杂度：O(N); 空间复杂度：O(N)</p>
@@ -46,6 +46,3 @@ export default function ArrayFlat() {
     </>
   )
 }
-
-
-
