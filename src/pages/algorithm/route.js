@@ -3,6 +3,7 @@ import ClimbStairs from './climbStairs'
 import Sqrt from './sqrt'
 import InvertTree from './invertTree'
 import QuickSort from './quicksort'
+import FindKthLargest from './findKthLargest'
 
 const genConfig = function () {
   const config = [
@@ -30,6 +31,11 @@ const genConfig = function () {
       path: "quickSort",
       element: <QuickSort />,
       title: '快速排序'
+    },
+    {
+      path: "findKthLargest",
+      element: <FindKthLargest />,
+      title: '数组中的第K个最大元素'
     }
   ];
 
