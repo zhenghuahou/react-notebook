@@ -2,6 +2,7 @@ import Fib from './fib'
 import ClimbStairs from './climbStairs'
 import Sqrt from './sqrt'
 import InvertTree from './invertTree'
+import QuickSort from './quicksort'
 
 const genConfig = function () {
   const config = [
@@ -24,6 +25,11 @@ const genConfig = function () {
       path: "invertTree",
       element: <InvertTree />,
       title: '翻转二叉树'
+    },
+    {
+      path: "quickSort",
+      element: <QuickSort />,
+      title: '快速排序'
     }
   ];
 
