@@ -5,6 +5,7 @@ import InvertTree from './invertTree'
 import QuickSort from './quicksort'
 import FindKthLargest from './findKthLargest'
 import ReverseList from './reverseList'
+import ReverseString from './reverseString'
 import MaxDepth from './maxDepth'
 
 const genConfig = function () {
@@ -38,6 +39,11 @@ const genConfig = function () {
             path: "reverseList",
             element: <ReverseList />,
             title: '反转链表'
+        },
+        {
+            path: "reverseString",
+            element: <ReverseString />,
+            title: '反转字符串'
         },
         {
             path: "maxDepth",
