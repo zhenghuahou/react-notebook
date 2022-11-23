@@ -24,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "precommit": "echo 12",
+    "precommit": "echo test husky",
     "prepare": "husky install"
   },
   "eslintConfig": {
@@ -46,6 +46,8 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
     "husky": "^8.0.0"
   }
 }
