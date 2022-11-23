@@ -5,14 +5,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import SetState18 from './pages/setState-18'
-import Profiler from './pages/profiler'
-import UseLayoutEffect from './pages/useLayoutEffect'
-import SetState from './pages/setState'
-import BeforeYouMemo from './pages/beforeYouMemo'
-import Memo from './pages/memo'
-import Demanhook from './pages/demanhook'
+
 import Basic, { routeConfig } from './pages/basic'
+import ReactPractice, { routeConfig as ReactPracticeRouteConfig } from './pages/react'
+import Performance, { routeConfig as PerformanceRouteConfig } from './pages/react'
 import Program, { routeConfig as ProgramRouteConfig } from './pages/program'
 import Algorithm, { routeConfig as AlgorithmRouteConfig } from './pages/algorithm'
 import Network, { routeConfig as NetworkRouteConfig } from './pages/network'
@@ -21,7 +17,7 @@ const routerCfg = [
   {
     path: "basic",
     element: <Basic />,
-    title: 'basic',
+    title: 'js基础',
     children: routeConfig,
   },
   {
@@ -30,6 +26,7 @@ const routerCfg = [
     title: '编程案例',
     children: ProgramRouteConfig,
   },
+
   {
     path: "algorithm",
     element: <Algorithm />,
@@ -43,40 +40,19 @@ const routerCfg = [
     children: NetworkRouteConfig,
   },
   {
-    path: "profiler",
-    title: 'react profiler',
-    element: <Profiler />,
+    path: "performance",
+    element: <Performance />,
+    title: '性能',
+    children: PerformanceRouteConfig
   },
   {
-    path: "useLayoutEffect",
-    title:'useLayoutEffect',
-    element: <UseLayoutEffect />,
+    path: "reactPractice",
+    element: <ReactPractice />,
+    title: 'react practice',
+    children: ReactPracticeRouteConfig
   },
-  {
-    path: "setState-18",
-    title: 'setState with react v18',
-    element: <SetState18 />,
-  },
-  {
-    path: "setState",
-    title: 'setState是同步还是异步',
-    element: <SetState />,
-  },
-  {
-    path: "beforeyoumemo",
-    title: '状态下放，缩小状态影响范围状态下放',
-    element: <BeforeYouMemo />,
-  },
-  {
-    path: "memo",
-    title: 'memo+useCallback',
-    element: <Memo />,
-  },
-  {
-    path: "demanhook",
-    title: '按需加载hook',
-    element: <Demanhook />,
-  },
+
+
 ];
 const router = createBrowserRouter([
   {
@@ -104,8 +80,8 @@ function Layout() {
       </p>
       <nav className="nav">
         {routerCfg.map(r => {
-          const {path,title} = r;
-          return (<li  key={path}>
+          const { path, title } = r;
+          return (<li key={path}>
             <Link to={path}>{title}</Link>
           </li>)
         })}

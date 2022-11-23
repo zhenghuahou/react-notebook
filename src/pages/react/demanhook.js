@@ -1,4 +1,4 @@
-import { useOnDemandDataHook ,useNormalDataHook} from "../hooks";
+import { useOnDemandDataHook ,useNormalDataHook} from "../../hooks";
 // https://codesandbox.io/s/hooks-an-xu-geng-xin-forked-2ppxc6?file=/src/hooks.js
 const renderCntMap = {};
 const renderOnce = (name) => {
