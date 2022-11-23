@@ -30,7 +30,7 @@ export default function ArrayFlat() {
       <Highlight className="code">
         {code}
       </Highlight>
-      <p>实现一</p>
+      <p>实现二</p>
       <Highlight className="code">
         {code2}
       </Highlight>
