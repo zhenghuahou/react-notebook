@@ -9,6 +9,7 @@ import {
 import Basic, { routeConfig } from './pages/basic'
 import ReactPractice, { routeConfig as ReactPracticeRouteConfig } from './pages/react'
 import Performance, { routeConfig as PerformanceRouteConfig } from './pages/react'
+import Engineering, { routeConfig as EngineeringRouteConfig } from './pages/engineering'
 import Program, { routeConfig as ProgramRouteConfig } from './pages/program'
 import Algorithm, { routeConfig as AlgorithmRouteConfig } from './pages/algorithm'
 import Network, { routeConfig as NetworkRouteConfig } from './pages/network'
@@ -44,6 +45,12 @@ const routerCfg = [
     element: <Performance />,
     title: '性能',
     children: PerformanceRouteConfig
+  },
+  {
+    path: "engineering",
+    element: <Engineering />,
+    title: '工程化',
+    children: EngineeringRouteConfig
   },
   {
     path: "reactPractice",
