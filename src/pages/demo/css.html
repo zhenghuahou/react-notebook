@@ -1,27 +1,77 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>样式应用于非目标标签时</title>
-		<style>
-			#box{color: blue!important}
-			p{color: rgb(42, 165, 101)}
-            #test{
-				width: 200px;
-				height: 200px;
-				background-color: yellow;
-			}
 
-		</style>
-        <link rel='stylesheet' href='./style.css'>
-	</head>
-	<body>
-        <div id='test'></div>
-		<div id="box">
-            文字
-		  <p>
-		    <span>选中非目标元素的情况下，离目标越近者优先 </span>
-		  </p>
+<head>
+	<meta charset="UTF-8">
+	<title>样式应用于非目标标签时</title>
+	<style>
+		#box {
+			color: blue !important
+		}
+
+		p {
+			color: rgb(42, 165, 101)
+		}
+
+		#test {
+			width: 200px;
+			height: 200px;
+			background-color: yellow;
+		}
+	</style>
+	<style>
+		#layout {
+			background: red;
+		}
+
+		#layout .left {
+			float: left;
+			width: 100px;
+			height: 20px;
+			background: pink;
+		}
+
+		#layout .right {
+			height: 110px;
+			background: #ccc;
+			/* 方法一 */
+			overflow: hidden;
+
+		}
+	</style>
+	<link rel='stylesheet' href='./style.css'>
+</head>
+
+<body>
+	<div id='test'></div>
+	<div id="box">
+		文字
+		<p>
+			<span>选中非目标元素的情况下，离目标越近者优先 </span>
+		</p>
+	</div>
+	<div class="body">
+		<div class="border-box">
+			border-box
 		</div>
-	</body>
+	</div>
+	<div class="content-box">
+		content-box
+	</div>
+
+	<section id="layout">
+		<div class="left">left area</div>
+		<div class="right">right area
+			BFC的区域不会与浮动元素的布局重叠。BFC的区域不会与浮动元素的布局重叠。
+			BFC的区域不会与浮动元素的布局重叠。
+			BFC的区域不会与浮动元素的布局重叠。
+			BFC的区域不会与浮动元素的布局重叠。
+			BFC的区域不会与浮动元素的布局重叠。
+			BFC的区域不会与浮动元素的布局重叠。
+
+
+		</div>
+	</section>
+</body>
+
 </html>
