@@ -1,5 +1,5 @@
 import Highlight from '../../components/highlight';
-export default function ArrayFlat() {
+export default function ReverseList() {
 
   const code = `
   var reverseList = function(head) {

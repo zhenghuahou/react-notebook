@@ -1,5 +1,5 @@
 import Highlight from '../../components/highlight';
-export default function ArrayFlat() {
+export default function QuickSort() {
 
   const code = `
   //交互数组的2项

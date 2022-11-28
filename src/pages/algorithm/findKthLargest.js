@@ -1,5 +1,5 @@
 import Highlight from '../../components/highlight';
-export default function ArrayFlat() {
+export default function FindKthLargest() {
 
   const code = `
   function swap(arr, i, j) {

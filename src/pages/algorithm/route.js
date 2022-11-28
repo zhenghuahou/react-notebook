@@ -8,6 +8,7 @@ import ReverseList from './reverseList'
 import ReverseString from './reverseString'
 import MaxDepth from './maxDepth'
 import HasCycle from './hasCycle'
+import GetSmallestString from './getSmallestString'
 
 const genConfig = function () {
   const config = [
@@ -60,6 +61,11 @@ const genConfig = function () {
       path: "findKthLargest",
       element: <FindKthLargest />,
       title: '数组中的第K个最大元素'
+    },
+    {
+      path: "getSmallestString",
+      element: <GetSmallestString />,
+      title: '贪心：具有给定数值的最小字符串'
     }
   ];
 

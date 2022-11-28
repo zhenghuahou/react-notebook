@@ -1,5 +1,5 @@
 import Highlight from '../../components/highlight';
-export default function ArrayFlat() {
+export default function ClimbStairs() {
 
   const code = `
   var climbStairs = function(n) {
