@@ -5,6 +5,7 @@ import ObjectCreate from './objectCreate'
 import Proxy from './proxy'
 import ShadowDOM from './shadowDOM'
 import ShadowDOMCustomElements from './shadowDOM&customElements'
+import HashAndHistory from './hash&history'
 
 const genConfig = function () {
   const config = [
@@ -40,6 +41,10 @@ const genConfig = function () {
       path: "shadowDOMCustomElements",
       element: <ShadowDOMCustomElements />,
       title: 'shadow DOM & custom elements'
+    },{
+      path: "HashAndHistory",
+      element: <HashAndHistory />,
+      title: '前端路由的两种模式：hash模式和 history模式'
     }];
 
   config.map(item => {

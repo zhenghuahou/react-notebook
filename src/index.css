@@ -39,7 +39,7 @@ a {
 }
 
 .app-demo {
-  padding-left: 10em;
+  padding-left: 15em;
 }
 
 .main {
@@ -47,7 +47,7 @@ a {
 }
 
 .nav {
-  width: 10em;
+  width: 15em;
   position: fixed;
   left: 0;
   top: 0;
