@@ -4,6 +4,7 @@ import Sqrt from './sqrt'
 import InvertTree from './invertTree'
 import QuickSort from './quicksort'
 import FindKthLargest from './findKthLargest'
+import SumOfkNumber from './sumOfkNumber'
 import ReverseList from './reverseList'
 import ReverseString from './reverseString'
 import MaxDepth from './maxDepth'
@@ -61,6 +62,11 @@ const genConfig = function () {
       path: "findKthLargest",
       element: <FindKthLargest />,
       title: '数组中的第K个最大元素'
+    },
+    {
+      path: "sumOfkNumber",
+      element: <SumOfkNumber />,
+      title: '寻找和为定值的多个数'
     },
     {
       path: "getSmallestString",
