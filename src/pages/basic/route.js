@@ -7,6 +7,7 @@ import ShadowDOM from './shadowDOM'
 import ShadowDOMCustomElements from './shadowDOM&customElements'
 import HashAndHistory from './hash&history'
 import Instanceof from './instanceof'
+import AddBigNumber from './addBigNumber'
 
 const genConfig = function () {
   const config = [
@@ -14,6 +15,10 @@ const genConfig = function () {
       path: "Operator",
       element: <Operator />,
       title: '操作运算符相关'
+    }, {
+      path: "AddBigNumber",
+      element: <AddBigNumber />,
+      title: '大数相加'
     }, {
       path: "Apply",
       element: <Apply />,
