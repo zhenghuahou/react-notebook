@@ -1,3 +1,4 @@
+import Var from './var'
 import Operator from './operator'
 import Apply from './apply&call'
 import New from './new'
@@ -11,6 +12,11 @@ import AddBigNumber from './addBigNumber'
 
 const genConfig = function () {
   const config = [
+    {
+      path: "Var",
+      element: <Var />,
+      title: '变量提升'
+    },
     {
       path: "Operator",
       element: <Operator />,

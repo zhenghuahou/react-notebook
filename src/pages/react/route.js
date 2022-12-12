@@ -4,6 +4,7 @@ import SetState from './setState'
 import BeforeYouMemo from './beforeYouMemo'
 import Memo from './memo'
 import Demanhook from './demanhook'
+import Event from './event'
 
 const genConfig = function () {
   const config = [
@@ -36,6 +37,11 @@ const genConfig = function () {
       path: "demanhook",
       title: '按需加载hook',
       element: <Demanhook />,
+    },
+    {
+      path: "event",
+      title: 'React合成事件',
+      element: <Event />,
     }
   ];
 

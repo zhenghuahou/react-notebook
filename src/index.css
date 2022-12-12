@@ -180,3 +180,8 @@ code i {
 [contenteditable]:focus {
   outline: 0px solid transparent;
 }
+
+.img-auto{
+  width: 100%;
+  height: auto;
+}
