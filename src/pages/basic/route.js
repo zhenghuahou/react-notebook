@@ -1,5 +1,6 @@
 import Var from './var'
 import Operator from './operator'
+import IIFE from './IIFE'
 import Apply from './apply&call'
 import New from './new'
 import ObjectCreate from './objectCreate'
@@ -21,7 +22,13 @@ const genConfig = function () {
       path: "Operator",
       element: <Operator />,
       title: '操作运算符相关'
-    }, {
+    }, 
+    {
+      path: "IIFE",
+      element: <IIFE />,
+      title: '立即执行函数表达式'
+    },
+    {
       path: "AddBigNumber",
       element: <AddBigNumber />,
       title: '大数相加'
