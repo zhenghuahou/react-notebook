@@ -1,27 +1,25 @@
 export default function Fake() {
     let i = 0;
     //极简的实现
-   return class Promise {
-        state = 'pending';//增加状态
-        value = null;//保存结果
+    return class Promise {
+        state = 'pending';
+        value = null;
 
         callbacks = [];
         id = ++i;
 
         constructor(fn) {
             window.test = this;
-            console.info('[constructor id]:', this.id, this)
             // fn:new promise传递的callback函数
             fn(this._resolve.bind(this), this._reject.bind(this));
         }
         then(onFulfilled, onRejected) {
-            // debugger
-            console.info('id:', this.id, '[then] this:', this)
             return new Promise((resolve, reject) => {
                 this._handle({
                     onFulfilled,
                     onRejected,
-                    resolve, // 桥梁，将新 Promise 的 resolve 方法，放到前一个 promise 的回调对象中
+                    // 桥梁，将新 Promise 的 resolve 方法，放到前一个 promise 的回调对象中
+                    resolve,
                     reject,
                     callbackId: this.id
                 })
@@ -36,7 +34,6 @@ export default function Fake() {
         finally(onDone) {
             if (typeof onDone !== 'function') return this.then();
             let Promise = this.constructor;
-            console.info('38  Promise.resolve:', Promise.resolve)
             return this.then(
                 value => Promise.resolve(onDone()).then(() => value),
                 reason => Promise.resolve(onDone()).then(() => { throw reason })
@@ -120,24 +117,18 @@ export default function Fake() {
             try {
                 ret = cb(this.value)
             } catch (e) {
-                // debugger
                 callback.reject(e)
-                // return
             }
 
-            console.info('id:', this.id, 'this.state:', this.state, '[_handle] ret:', ret, 'next:', next, ' this:', this)
             // ** 处理下一个 promise 的resolve/reject **
             next(ret)
         }
         _resolve(value) {
-            // debugger
             if (this.state !== 'pending') return
 
-            console.info('id:', this.id, '[______resolve_______] this:', this, '\n value:', value)
             if (value && (typeof value === 'object' || typeof value === 'function')) {
                 var { then } = value;
                 if (typeof then === 'function') {
-                    // debugger
                     then.call(value, this._resolve.bind(this), this._reject.bind(this))
                     return
 
@@ -149,13 +140,10 @@ export default function Fake() {
             this.callbacks.forEach(callback => this._handle(callback));
         }
         _reject(value) {
-            // debugger
             if (this.state !== 'pending') return
-            console.info('id:', this.id, '[_______reject_______] this:', this, '\n value:', value)
             if (value && (typeof value === 'object' || typeof value === 'function')) {
                 var { then } = value;
                 if (typeof then === 'function') {
-                    debugger
                     then.call(value, this._reject.bind(this), this._reject.bind(this))
                     return
 
