@@ -10,26 +10,27 @@ import ShadowDOMCustomElements from './shadowDOM&customElements'
 import HashAndHistory from './hash&history'
 import Instanceof from './instanceof'
 import AddBigNumber from './addBigNumber'
+import Promise from './promise'
 
 const genConfig = function () {
   const config = [
     {
-      path: "Var",
+      path: "var",
       element: <Var />,
       title: '变量提升'
     },
     {
-      path: "Operator",
+      path: "operator",
       element: <Operator />,
       title: '操作运算符相关'
-    }, 
+    },
     {
       path: "IIFE",
       element: <IIFE />,
       title: '立即执行函数表达式'
     },
     {
-      path: "AddBigNumber",
+      path: "addBigNumber",
       element: <AddBigNumber />,
       title: '大数相加'
     }, {
@@ -38,7 +39,7 @@ const genConfig = function () {
       title: 'apply与call'
     },
     {
-      path: "Object.create",
+      path: "object.create",
       element: <ObjectCreate />,
       title: 'Object.create'
     },
@@ -47,12 +48,12 @@ const genConfig = function () {
       element: <New />,
       title: 'new操作符'
     }, {
-      path: "Proxy",
+      path: "proxy",
       element: <Proxy />,
       title: 'proxy / Reflect 相关'
     },
     {
-      path: "ShadowDOM",
+      path: "shadowDOM",
       element: <ShadowDOM />,
       title: 'shadow DOM 相关'
     },
@@ -61,13 +62,17 @@ const genConfig = function () {
       element: <ShadowDOMCustomElements />,
       title: 'shadow DOM & custom elements'
     }, {
-      path: "HashAndHistory",
+      path: "hashAndHistory",
       element: <HashAndHistory />,
       title: '前端路由的两种模式：hash模式和 history模式'
     }, {
       path: "instanceof",
       element: <Instanceof />,
       title: 'instanceof原理'
+    }, {
+      path: "promise",
+      element: <Promise />,
+      title: 'Promise原理'
     }];
 
   config.map(item => {
