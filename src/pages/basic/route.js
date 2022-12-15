@@ -2,6 +2,7 @@ import Var from './var'
 import Operator from './operator'
 import IIFE from './IIFE'
 import Apply from './apply&call'
+import Bind from './bind'
 import New from './new'
 import ObjectCreate from './objectCreate'
 import Proxy from './proxy'
@@ -37,6 +38,11 @@ const genConfig = function () {
       path: "Apply",
       element: <Apply />,
       title: 'apply与call'
+    },
+    {
+      path: "bind",
+      element: <Bind />,
+      title: 'Bind的模拟实现'
     },
     {
       path: "object.create",

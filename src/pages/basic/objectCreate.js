@@ -28,6 +28,15 @@ export default function ObjectCreate() {
     var o2 = Object.create(p)
     console.info(o2.__proto__=== p) //true
 
+
+    /*Object.create 的模拟实现:
+      Object.create = function( o ) {
+          function f(){}
+          f.prototype = o;
+          return new f;
+      };
+    */
+
   `
 
   return <>
