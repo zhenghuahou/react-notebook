@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>样式应用于非目标标签时</title>
+	<style>
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			margin: 0;
+			gap: 20px;
+		}
+
+		.list {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			width: 400px;
+		}
+
+		.item {
+			position: relative;
+			/* margin: 10px 0; */
+			padding: 10px 10px 10px 34px;
+			cursor: pointer;
+			counter-increment: num;
+		}
+
+		.title::before {
+			content: counter(num) " ";
+			width: 25px;
+			line-height: 30px;
+			text-align: center;
+			color: #fff;
+			position: absolute;
+			font-size: 14px;
+			font-family: fantasy;
+			left: 4px;
+			background: center/100% 100% url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA8CAMAAAAe9Wm0AAAAbFBMVEUAAACaov2SnPKXnvaXofiyuvuCjPOgqvi4vfiBjPSyuf6Ml/a0u/21vPtte/F/i/WTnfWNmPiyuv6Ik/Zue/GRnPinr/Wfp/Gyuv6Ml/ebo/KTnfOutfqEj/W3vvpue/G/xfd1gvN8iPRodfBFzp+BAAAAF3RSTlMAECA7U2BgdIiTn6Wsvr+/v9Df39/s/o6+GugAAAGPSURBVHjazdZhk4IgEAZgpS6z8iotPEBF8P//x1tJrTxQlrm5uff7MxubLBtF9sQfp+ywjRCJk+zLhPq6SUwuxokhp4/YT1SUVtWam4nSZObImyA2YXHZ022cYsirOzwYoYti7nJzuMOqeHPNvke5jxgP2DRNNqLSMzQQtXjUtv8cBTWiwqOqohcsKikt8ajkHI+4EGjEBWNnNGJ1jUe1Vp9YJLSSeKRkh0eyC0BdEJIBZ5J/h1TA/6SUOgcgjUdaT6gJQA0CjV85jFrq/ZU/UYtA7HFzG5iA1PcOMnbs0b7tU/mcCAhjO/NE52A8jmXKMHYdnukTzE141vhyGWaSTq97ksMQhOnEF8qYFJvXneDO++lU82VznG0giYDppBVzTTvIffdjZSGFVjA2JHeVuRDbopOC6TrJ7GUSx0a1vYGR8u1kQ5krce5hJAUjlRbuRtuyu8GFVopxZ6OtxW5wObU2P3Ewaby+jya6R7UYO+C3xpICbk3NFhptTToaZ6OtzS/WGm39iUdkmdFFv5pvdNPREWjicTcAAAAASUVORK5CYII=);
+		}
+
+		.title {
+			margin: 0;
+			padding: 8px 0;
+			font-weight: normal;
+		}
+
+		.sumary {
+			margin: 0;
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			color: #666;
+			font-size: 14px;
+			height: 0;
+		}
+
+		.item::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			border-radius: 8px;
+			opacity: 0;
+			z-index: -1;
+			background: linear-gradient(270deg,
+					rgb(241, 236, 249) 0%,
+					rgba(241, 236, 249, 0) 100%);
+		}
+
+		/* 默认 transition */
+
+		.item::before,
+		.item .sumary,
+		.item .title {
+			transition: 0s 9999s;
+		}
+
+		/* 初始状态（第一个选中） */
+		.item:first-child .sumary {
+			height: 40px;
+		}
+
+		.item:first-child .title {
+			color: rebeccapurple;
+		}
+
+		.item:first-child::before {
+			opacity: 1;
+		}
+
+		/* 清除所有hover */
+		.list:hover .title {
+			transition: none;
+			color: #333;
+		}
+
+		
+		.list:hover .sumary {
+			transition: none;
+			height: 0;
+		}
+
+		.list:hover .item::before {
+			transition: none;
+			opacity: 0;
+		} 
+
+		/* 每一项hover */
+		.item:hover .title {
+			color: rebeccapurple;
+		}
+
+		.item:hover .sumary {
+			height: 40px;
+		}
+
+		.item.item:hover::before {
+			opacity: 1;
+			/* background-color: red; */
+		}
+	</style>
+
+</head>
+
+<body>
+	<ul class="list">
+		<li class="item">
+			<h3 class="title">将军，夫人喊你种田了</h3>
+			<p class="sumary">
+				只是在休息室里打了个盹儿，一睁眼，竟然穿成了古代目不识丁的乡下胖丫头。
+				好吃懒做不说，还在村里横行霸道。
+				十里八乡没人愿意娶她，好不容易买了个金龟婿，大婚之日竟让人逃了。
+				恶霸老爹一怒之下去道上掳了个夫君给她。 就是……爹你掳的是不是有点不太对呀？
+				＊ 婚后的苏胖丫很忙。 忙着改造恶霸爹爹与恶霸弟弟。
+				忙着抢救貌美如花的神将夫君。 忙着养育三个小小恶霸小豆丁。
+				一不小心，将自己忙成了大燕最位高权重的一品女侯！
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">被夺一切后她封神回归</h3>
+			<p class="sumary">
+				【甜爽燃，团宠，玄学】
+				司扶倾一睁眼，不仅被夺了气运，人人还让她滚出娱乐圈。
+				重活一次，她只想咸鱼躺，谁知现在圈内人只知拉踩营销，没点真本事，不好好磨炼演技，这样下去还能行？怎么也得收拾收拾。
+				司扶倾捏了捏手腕，动了。
+				后来，网上疯狂骂她不自量力倒贴郁曜，造谣她私生活不检点，而——
+				国际天后：今天我能站在这里，多亏了倾倾 top1男顶流：离我妹妹远点@郁曜
+				就连国际运动会官方：恭喜司扶倾拿下第13枚个人金牌，等一个退圈
+				当天，全网瘫痪。 ·
+				史书记载，胤皇年少成名，八方征战，平天下，安宇内，是大夏朝最年轻的帝王，他完美强大，心怀天下，却因病死于27岁，一生短暂，无妻无妾，无子无孙，是无数人的白月光男神。
+				无人知晓，他再睁开眼，来到了1500年后。
+				这一次，他看见了他遥想过的盛世大夏。 ·
+				不久后胤皇身份曝光，司扶倾得知偶像竟然就在身边，她敬佩万分，只想——
+				司扶倾：努力奋斗，报效大夏！ 胤皇：以身相许 司扶倾：？？？
+				我一心奋发上进你却想要我？ · 全能颜巅女神×杀伐清贵帝王
+				从全网黑到封神顶流，顺便和男神1v1
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">簪星</h3>
+			<p class="sumary">
+				社畜杨簪星在连续五天熬夜加班后，穿进了自己上个月看的一本古早男频修仙爽文里，并成功当上了出场三千字就因陷害男主青梅竹马被男主一掌轰死的炮灰女配。
+				杨簪星：有事吗？？？ 熟知剧情的社畜发出振聋发聩的呐喊：我命由我不由天哈！
+				然而.....
+				四十年前的妖鲛归来复仇，秘境中遗留下的神女遗迹，凋零的蛇巫一族再现人间，更有传说中的神剑重见天日......
+				老天爷是不是玩不起？？
+				面对逐渐升级的剧情难度，簪星只有一个目的——苟到大结局。
+				——天命，是无论如何都会发生的事，不管你怎么挣扎，结局都不会改变。
+				——我偏要改变。
+				一个我命由我不由原著的故事，口是心非臭屁小师叔x努力苟到结局大师侄，女主有金手指，请支持正版茶～
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">将军，夫人喊你种田了</h3>
+			<p class="sumary">
+				只是在休息室里打了个盹儿，一睁眼，竟然穿成了古代目不识丁的乡下胖丫头。
+				好吃懒做不说，还在村里横行霸道。
+				十里八乡没人愿意娶她，好不容易买了个金龟婿，大婚之日竟让人逃了。
+				恶霸老爹一怒之下去道上掳了个夫君给她。 就是……爹你掳的是不是有点不太对呀？
+				＊ 婚后的苏胖丫很忙。 忙着改造恶霸爹爹与恶霸弟弟。
+				忙着抢救貌美如花的神将夫君。 忙着养育三个小小恶霸小豆丁。
+				一不小心，将自己忙成了大燕最位高权重的一品女侯！
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">被夺一切后她封神回归</h3>
+			<p class="sumary">
+				【甜爽燃，团宠，玄学】
+				司扶倾一睁眼，不仅被夺了气运，人人还让她滚出娱乐圈。
+				重活一次，她只想咸鱼躺，谁知现在圈内人只知拉踩营销，没点真本事，不好好磨炼演技，这样下去还能行？怎么也得收拾收拾。
+				司扶倾捏了捏手腕，动了。
+				后来，网上疯狂骂她不自量力倒贴郁曜，造谣她私生活不检点，而——
+				国际天后：今天我能站在这里，多亏了倾倾 top1男顶流：离我妹妹远点@郁曜
+				就连国际运动会官方：恭喜司扶倾拿下第13枚个人金牌，等一个退圈
+				当天，全网瘫痪。 ·
+				史书记载，胤皇年少成名，八方征战，平天下，安宇内，是大夏朝最年轻的帝王，他完美强大，心怀天下，却因病死于27岁，一生短暂，无妻无妾，无子无孙，是无数人的白月光男神。
+				无人知晓，他再睁开眼，来到了1500年后。
+				这一次，他看见了他遥想过的盛世大夏。 ·
+				不久后胤皇身份曝光，司扶倾得知偶像竟然就在身边，她敬佩万分，只想——
+				司扶倾：努力奋斗，报效大夏！ 胤皇：以身相许 司扶倾：？？？
+				我一心奋发上进你却想要我？ · 全能颜巅女神×杀伐清贵帝王
+				从全网黑到封神顶流，顺便和男神1v1
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">簪星</h3>
+			<p class="sumary">
+				社畜杨簪星在连续五天熬夜加班后，穿进了自己上个月看的一本古早男频修仙爽文里，并成功当上了出场三千字就因陷害男主青梅竹马被男主一掌轰死的炮灰女配。
+				杨簪星：有事吗？？？ 熟知剧情的社畜发出振聋发聩的呐喊：我命由我不由天哈！
+				然而.....
+				四十年前的妖鲛归来复仇，秘境中遗留下的神女遗迹，凋零的蛇巫一族再现人间，更有传说中的神剑重见天日......
+				老天爷是不是玩不起？？
+				面对逐渐升级的剧情难度，簪星只有一个目的——苟到大结局。
+				——天命，是无论如何都会发生的事，不管你怎么挣扎，结局都不会改变。
+				——我偏要改变。
+				一个我命由我不由原著的故事，口是心非臭屁小师叔x努力苟到结局大师侄，女主有金手指，请支持正版茶～
+			</p>
+		</li>
+	</ul>
+	<ul class="list">
+		<li class="item">
+			<h3 class="title">将军，夫人喊你种田了</h3>
+			<p class="sumary">
+				只是在休息室里打了个盹儿，一睁眼，竟然穿成了古代目不识丁的乡下胖丫头。
+				好吃懒做不说，还在村里横行霸道。
+				十里八乡没人愿意娶她，好不容易买了个金龟婿，大婚之日竟让人逃了。
+				恶霸老爹一怒之下去道上掳了个夫君给她。 就是……爹你掳的是不是有点不太对呀？
+				＊ 婚后的苏胖丫很忙。 忙着改造恶霸爹爹与恶霸弟弟。
+				忙着抢救貌美如花的神将夫君。 忙着养育三个小小恶霸小豆丁。
+				一不小心，将自己忙成了大燕最位高权重的一品女侯！
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">被夺一切后她封神回归</h3>
+			<p class="sumary">
+				【甜爽燃，团宠，玄学】
+				司扶倾一睁眼，不仅被夺了气运，人人还让她滚出娱乐圈。
+				重活一次，她只想咸鱼躺，谁知现在圈内人只知拉踩营销，没点真本事，不好好磨炼演技，这样下去还能行？怎么也得收拾收拾。
+				司扶倾捏了捏手腕，动了。
+				后来，网上疯狂骂她不自量力倒贴郁曜，造谣她私生活不检点，而——
+				国际天后：今天我能站在这里，多亏了倾倾 top1男顶流：离我妹妹远点@郁曜
+				就连国际运动会官方：恭喜司扶倾拿下第13枚个人金牌，等一个退圈
+				当天，全网瘫痪。 ·
+				史书记载，胤皇年少成名，八方征战，平天下，安宇内，是大夏朝最年轻的帝王，他完美强大，心怀天下，却因病死于27岁，一生短暂，无妻无妾，无子无孙，是无数人的白月光男神。
+				无人知晓，他再睁开眼，来到了1500年后。
+				这一次，他看见了他遥想过的盛世大夏。 ·
+				不久后胤皇身份曝光，司扶倾得知偶像竟然就在身边，她敬佩万分，只想——
+				司扶倾：努力奋斗，报效大夏！ 胤皇：以身相许 司扶倾：？？？
+				我一心奋发上进你却想要我？ · 全能颜巅女神×杀伐清贵帝王
+				从全网黑到封神顶流，顺便和男神1v1
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">簪星</h3>
+			<p class="sumary">
+				社畜杨簪星在连续五天熬夜加班后，穿进了自己上个月看的一本古早男频修仙爽文里，并成功当上了出场三千字就因陷害男主青梅竹马被男主一掌轰死的炮灰女配。
+				杨簪星：有事吗？？？ 熟知剧情的社畜发出振聋发聩的呐喊：我命由我不由天哈！
+				然而.....
+				四十年前的妖鲛归来复仇，秘境中遗留下的神女遗迹，凋零的蛇巫一族再现人间，更有传说中的神剑重见天日......
+				老天爷是不是玩不起？？
+				面对逐渐升级的剧情难度，簪星只有一个目的——苟到大结局。
+				——天命，是无论如何都会发生的事，不管你怎么挣扎，结局都不会改变。
+				——我偏要改变。
+				一个我命由我不由原著的故事，口是心非臭屁小师叔x努力苟到结局大师侄，女主有金手指，请支持正版茶～
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">将军，夫人喊你种田了</h3>
+			<p class="sumary">
+				只是在休息室里打了个盹儿，一睁眼，竟然穿成了古代目不识丁的乡下胖丫头。
+				好吃懒做不说，还在村里横行霸道。
+				十里八乡没人愿意娶她，好不容易买了个金龟婿，大婚之日竟让人逃了。
+				恶霸老爹一怒之下去道上掳了个夫君给她。 就是……爹你掳的是不是有点不太对呀？
+				＊ 婚后的苏胖丫很忙。 忙着改造恶霸爹爹与恶霸弟弟。
+				忙着抢救貌美如花的神将夫君。 忙着养育三个小小恶霸小豆丁。
+				一不小心，将自己忙成了大燕最位高权重的一品女侯！
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">被夺一切后她封神回归</h3>
+			<p class="sumary">
+				【甜爽燃，团宠，玄学】
+				司扶倾一睁眼，不仅被夺了气运，人人还让她滚出娱乐圈。
+				重活一次，她只想咸鱼躺，谁知现在圈内人只知拉踩营销，没点真本事，不好好磨炼演技，这样下去还能行？怎么也得收拾收拾。
+				司扶倾捏了捏手腕，动了。
+				后来，网上疯狂骂她不自量力倒贴郁曜，造谣她私生活不检点，而——
+				国际天后：今天我能站在这里，多亏了倾倾 top1男顶流：离我妹妹远点@郁曜
+				就连国际运动会官方：恭喜司扶倾拿下第13枚个人金牌，等一个退圈
+				当天，全网瘫痪。 ·
+				史书记载，胤皇年少成名，八方征战，平天下，安宇内，是大夏朝最年轻的帝王，他完美强大，心怀天下，却因病死于27岁，一生短暂，无妻无妾，无子无孙，是无数人的白月光男神。
+				无人知晓，他再睁开眼，来到了1500年后。
+				这一次，他看见了他遥想过的盛世大夏。 ·
+				不久后胤皇身份曝光，司扶倾得知偶像竟然就在身边，她敬佩万分，只想——
+				司扶倾：努力奋斗，报效大夏！ 胤皇：以身相许 司扶倾：？？？
+				我一心奋发上进你却想要我？ · 全能颜巅女神×杀伐清贵帝王
+				从全网黑到封神顶流，顺便和男神1v1
+			</p>
+		</li>
+		<li class="item">
+			<h3 class="title">簪星</h3>
+			<p class="sumary">
+				社畜杨簪星在连续五天熬夜加班后，穿进了自己上个月看的一本古早男频修仙爽文里，并成功当上了出场三千字就因陷害男主青梅竹马被男主一掌轰死的炮灰女配。
+				杨簪星：有事吗？？？ 熟知剧情的社畜发出振聋发聩的呐喊：我命由我不由天哈！
+				然而.....
+				四十年前的妖鲛归来复仇，秘境中遗留下的神女遗迹，凋零的蛇巫一族再现人间，更有传说中的神剑重见天日......
+				老天爷是不是玩不起？？
+				面对逐渐升级的剧情难度，簪星只有一个目的——苟到大结局。
+				——天命，是无论如何都会发生的事，不管你怎么挣扎，结局都不会改变。
+				——我偏要改变。
+				一个我命由我不由原著的故事，口是心非臭屁小师叔x努力苟到结局大师侄，女主有金手指，请支持正版茶～
+			</p>
+		</li>
+	</ul>
+</body>
+
+</html>

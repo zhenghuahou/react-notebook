@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>样式应用于非目标标签时</title>
+	<style>
+		body {
+			padding: 10px;
+		}
+
+		* {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+
+		.bfc{
+			overflow: scroll;
+			background-color: #999;
+			margin:  20px;
+		}
+		.box {
+			width: 100px;
+			height: 100px;
+			border: 8px solid #ccc;
+			padding: 9px;
+			margin: 20px;
+		}
+
+		.border-box {
+			box-sizing: border-box;
+		}
+
+		.content-box {
+			box-sizing: content-box;
+		}
+
+
+		#sec {
+			background: #f00;
+			overflow: hidden;
+		}
+
+		.child {
+			height: 100px;
+			margin-top: 10px;
+			background: yellow;
+			overflow: hidden;
+		}
+	</style>
+
+</head>
+
+<body>
+	<pre>
+		js获取dom宽度/高度:dom.getBoundingClientRect().width/height
+	</pre>
+	<pre>
+
+		IE模型元素宽度width=content+padding+border，高度计算相同
+
+
+		BFC(Block Formatting Context)：块级格式化上下文。
+		BFC决定了元素如何对其内容进行定位，以及与其他元素的关系和相互作用。当设计到可视化布局的时候，BFC提供了一个环境，HTML元素在这个环境中按照一定的规则进行布局。一个环境中的元素不会影响到其他环境中的布局。
+
+		BFC的原理（渲染规则）
+
+		BFC元素垂直方向的边距会发生重叠。属于不同BFC外边距不会发生重叠
+		BFC的区域不会与浮动元素的布局重叠。
+		BFC元素是一个独立的容器，外面的元素不会影响里面的元素。里面的元素也不会影响外面的元素。
+		计算BFC高度的时候，浮动元素也会参与计算(清除浮动)
+		如何创建BFC
+
+		overflow不为visible;
+		float的值不为none；
+		position的值不为static或relative；
+		display属性为inline-blocks,table,table-cell,table-caption,flex,inline-flex;
+	</pre>
+	<div class="box">
+		box(宽度134)
+	</div>
+	<div class="bfc">
+		<div class="box border-box">
+			border-box(宽度66)
+		</div>
+	</div>
+
+	<div class="box content-box">
+		content-box(宽度134)
+	</div>
+
+	<section id="sec">
+		<article class="child"></article>
+	</section>
+
+	<br/>
+
+	<section id="layout">
+        <style media="screen">
+            #layout {
+                background: red;
+            }
+            #layout .left {
+                float: left;
+                width: 100px;
+                height: 100px;
+                background: pink;
+            }
+            #layout .right {
+                height: 110px;
+                background: #ccc;
+				overflow: scroll;
+				/* overflow: hidden; */
+            }
+        </style>
+        <div class="left"></div>
+        <div class="right">
+			我们看这里的2，它的上下外边距都没有与1和3发生重叠，但3与4外边距发生了重叠。这就解释了BFC创建了一个独立的环境，这个环境中的元素不会影响到其他环境中的布局，所以BFC内的外边距不与外部的外边距发生重叠。
+		</div>
+    </section>
+	<br />
+	<a href="https://segmentfault.com/a/1190000013069516">参考网址</a>
+</body>
+
+</html>
