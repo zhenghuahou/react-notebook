@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>圣杯布局</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    h3 {
+      font-size: 14px;
+    }
+
+    .header,
+    .footer {
+      height: 100px;
+      line-height: 100px;
+      background-color: green;
+      text-align: center;
+      font-size: 30px;
+      font-weight: bolder;
+    }
+
+    .footer {
+      background-color: goldenrod;
+    }
+
+    .container-1 {
+      min-width: 600px;
+      overflow: hidden;
+    }
+
+    .container-1 .left,
+    .container-1 .middle,
+    .container-1 .right {
+      float: left;
+      word-break: break-all;
+    }
+
+    .container-1 .left,
+    .container-1 .right {
+      padding-bottom: 9999px;
+      margin-bottom: -9999px;
+    }
+
+    .container-1 .left {
+      margin-left: -100%;
+      width: 200px;
+      background-color: red;
+
+    }
+
+    .container-1 .right {
+      margin-left: -220px;
+      width: 220px;
+      background-color: green;
+    }
+
+    .container-1 .middle {
+      width: 100%;
+      height: 100%;
+      background-color: blue;
+    }
+
+    .container-1 .inner {
+      margin: 0 220px 0 200px;
+      background: blue;
+      word-break: break-all;
+      padding-bottom: 9999px;
+      margin-bottom: -9999px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+
+    .container-2 .left {
+      position: relative;
+      z-index: 2;
+      margin-right: -100%;
+      margin-left: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="header">header</div>
+  <h3>方案一：<br />
+    布局的缺点: middle容器的位置必须要在第一个位置，如果调换了middle的顺序，布局就失效了
+  </h3>
+  <div class="container-1">
+    <div class="middle">
+      <div class="inner">
+        <h4>middle</h4>
+        <p>
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddl
+          emiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddle
+        </p>
+      </div>
+    </div>
+    <div class="left">
+      <h4>left</h4>
+      <p>
+        leftleftleftleftleftleftleftleftleftleftleftleft
+        leftleftleftleftleftleftleftleftleftleftleftleft
+        leftleftleftleftleftleftleftleftleftleftleftleft
+      </p>
+    </div>
+    <div class="right">
+      <h4>right</h4>
+      <p>
+        rightrightrightrightrightrightrightrightrightright
+        rightrightrightrightrightrightrightrightrightright
+      </p>
+    </div>
+
+  </div>
+  <br />
+  <hr />
+  <br />
+  <h3>方案二：<br />
+    基于方案一上做修改，改进之后，middle可以按照内容展示的顺序排放，也就是middle放在left，right直接
+  </h3>
+  <div class="container-1 container-2">
+    <div class="left">
+      <h4>left</h4>
+      <p>
+        leftleftleftleftleftleftleftleftleftleftleftleft
+        leftleftleftleftleftleftleftleftleftleftleftleft
+        leftleftleftleftleftleftleftleftleftleftleftleft
+      </p>
+    </div>
+    <div class="middle">
+      <div class="inner">
+        <h4>middle</h4>
+        <p>
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+          middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        </p>
+      </div>
+    </div>
+    <div class="right">
+      <h4>right</h4>
+      <p>
+        rightrightrightrightrightrightrightrightrightright
+        rightrightrightrightrightrightrightrightrightright
+      </p>
+    </div>
+  </div>
+  <br />
+  <hr />
+  <br />
+  <h3>方案三：flex布局<br />
+    优点：实现比较简单
+  </h3>
+  <style>
+    .container-3 {
+      display: flex;
+      background-color: pink;
+      word-break: break-all;
+      overflow: hidden;
+    }
+
+    .container-3 div:nth-child(2) {
+      flex: 1;
+      background-color: blue;
+    }
+
+    .container-3 div:nth-child(1),
+    .container-3 div:nth-child(3) {
+      width: 200px;
+      background-color: red;
+    }
+
+    .container-3 div:nth-child(3) {
+      width: 220px;
+      background-color: green;
+
+    }
+  </style>
+  <div class="container-3">
+    <div class="left">
+      <h4>left</h4>
+      <p>
+        left
+      </p>
+    </div>
+    <div class="middle">
+      <h4>middle</h4>
+      <p>
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+      </p>
+    </div>
+    <div class="right">
+      <h4>right</h4>
+      <p>
+        rightrightrightrightrightrightrightrightrightright
+        rightrightrightrightrightrightrightrightrightright
+      </p>
+    </div>
+  </div>
+  <br />
+  <hr />
+  <br />
+  <h3>方案四：postion：absolute定位布局<br />
+    缺点:左右2边的容器的高度只能跟middle对齐，如果左右2边的内容高度大于middle高度，由于container设置了overflow: hidden;
+    所以会把左右2边超出中间主题内容的部分给隐藏了。
+  </h3>
+  <style>
+    .container-4 {
+      background-color: pink;
+      position: relative;
+      word-break: break-all;
+      overflow: hidden;
+    }
+
+    .container-4 .middle {
+      margin: 0 220px 0 200px;
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      background-color: blue;
+    }
+
+    .container-4 .left,
+    .container-4 .right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 200px;
+      background-color: red;
+    }
+
+    .container-4 .left {
+      left: 0;
+      /* 滑动显示被隐藏的内容 */
+      /* overflow: scroll; */
+    }
+
+    .container-4 .right {
+      right: 0;
+      width: 220px;
+      background-color: green;
+    }
+  </style>
+
+  <div class="container-4">
+    <div class="left">
+      <h4>left</h4>
+      <p>
+        left
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle11
+        lemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle22
+      </p>
+    </div>
+    <div class="middle">
+      <h4>middle</h4>
+      <p>
+        middlemiddlemiddlemiddlemiddlemiddlemiddlemiddle
+      </p>
+    </div>
+    <div class="right">
+      <h4>right</h4>
+      <p>
+        rightrightrightrightrightrightrightrightrightright
+        rightrightrightrightrightrightrightrightrightright
+      </p>
+    </div>
+  </div>
+  <div class="footer">footer</div>
+
+  参考网址:
+  <a href="https://juejin.cn/post/6844903817104850952"></a>
+  <a href="https://juejin.cn/post/7008518783740411934"></a>
+  <a href="https://juejin.cn/post/7008460268145475615"></a>
+</body>
+
+</html>
