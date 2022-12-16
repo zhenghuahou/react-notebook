@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>JS Bin</title>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		font-size: 14px;
+		color: #ccc;
+		background-color: black;
+		padding: 10px;
+	}
+
+	.box-1 {
+		width: 300px;
+		height: 300px;
+		background-color: #ccc;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #333;
+	}
+
+	.box-1 .a {
+		background-color: pink;
+	}
+
+
+	.box-2 {
+		width: 300px;
+		height: 300px;
+		background-color: red;
+		position: relative;
+	}
+
+	.box-2 .a {
+		background-color: blue;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.box-3 {
+		width: 300px;
+		height: 300px;
+		background-color: yellow;
+		position: relative;
+	}
+
+	.box-3 .a {
+		width: 200px;
+		height: 200px;
+		background-color: blue;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
+
+
+	.box-4 {
+		width: 300px;
+		height: 300px;
+		background-color: red;
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+	}
+
+	.box-4 .a {
+		text-align: left;
+		display: inline-block;
+		background-color: blue;
+	}
+
+	.box-5 {
+		width: 300px;
+		height: 300px;
+		background-color: #360;
+		display: table-cell;
+		vertical-align: middle;
+	}
+
+	.box-5 .a {
+		margin: 0 auto;
+		width: 80%;
+		background-color: blue;
+	}
+
+	.box-6 {
+		width: 300px;
+		height: 300px;
+		background-color: red;
+		display: table;
+		vertical-align: middle;
+		text-align: center;
+	}
+
+	.box-6 .a {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+		background-color: blue;
+		padding: 20px;
+	}
+
+	.box-7 {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+		width: 500px;
+		height: 500px;
+		background-color: skyblue;
+	}
+
+	/* .box-7 span{
+		color: #666;
+		display: inline-block;
+		vertical-align: middle;
+	} */
+	.box-7 img {
+		background-color: aqua;
+		vertical-align: middle;
+	}
+
+	.pl-20 {
+		padding-left: 20px;
+	}
+</style>
+
+<body>
+	<div class="box-1">
+		<div class="a">
+			方案一(元素不定宽高):<br />
+			display:flex;<br />
+			justify-content:center;<br />
+			align-items:center;
+		</div>
+	</div>
+
+	<div class="box-2">
+		<div class="a">
+			方案二(元素不定宽高):<br />
+			position:absolute;<br />
+			left: 50%;<br />
+			top: 50%;<br />
+			transform: translate(-50%,-50%);
+		</div>
+	</div>
+	<div class="box-3">
+		<div class="a">
+			方案三(元素宽高固定):<br />
+			如果子元素不设置宽度和高度，将会铺满整个父级
+			position:absolute;<br />
+			top: 0;<br />
+			bottom: 0;<br />
+			left: 0;<br />
+			right: 0;<br />
+			margin: auto;
+		</div>
+	</div>
+
+	<div class="box-4">
+		<div class="a">
+			方案四(元素不定宽高):<br />
+			父元素设置:<br />
+			display: table-cell;<br />
+			vertical-align: middle;<br />
+			text-align: center;<br />
+			子元素设置:<br />
+			display: inline-block;(行内元素)<br />
+		</div>
+	</div>
+	<div>
+		<div class="box-5">
+			<div class="a">
+				方案五(元素宽固定，高不固定):<br />
+				父元素设置:<br />
+				display: table-cell;<br />
+				vertical-align: middle;<br />
+				子元素设置:<br />
+				margin: 0 auto;<br />
+				width: 80%;(需要为width设置一个指，设置为固定的px值也可以)
+			</div>
+		</div>
+	</div>
+	<br />
+	<hr />
+	<br />
+	<p>在线demo--文字水平垂直居中(实现方法还是采用的方案四）:</p>
+	<div class="box-6">
+		<div class="a">
+			使文字水平垂直居中:<br />
+			给父级设置 display : table，子集设置 display：tablecell ，子集会充满全屏
+		</div>
+	</div>
+	<br />
+	<hr />
+	<br />
+	<p>在线demo--图片水平垂直居中(实现方法还是采用的方案四）:</p>
+	<div class="box-7">
+		<!-- <span>方案四的方法</span> -->
+		<img src="https://gw.alicdn.com/tfs/TB176rg4VP7gK0jSZFjXXc5aXXa-286-118.png" alt="">
+	</div>
+
+
+	<style>
+		.box-8 {
+			display: table;
+			width: 90%;
+			margin: 10px auto;
+			padding: 10px;
+			border: 5px solid green;
+			height: 100px;
+		}
+
+		.left,
+		.right {
+			display: table-cell;
+			width: 20%;
+			border: 3px solid red;
+			/* Initial value */
+			/* vertical-align: baseline;  */
+			vertical-align: top;
+			/* vertical-align: middle; */
+		}
+
+		.center {
+			height: 100%;
+			background-color: green;
+		}
+	</style>
+
+	<div class="box-8">
+		<div class="left">
+			<p>我是左边</p>
+		</div>
+		<div class="center">
+			<p>我是中间</p>
+		</div>
+		<div class="right">
+			<p>我是右边</p>
+		</div>
+	</div>
+
+	<a href="https://juejin.cn/post/6844903821529841671#heading-0">参考网址</a>
+
+</body>
+
+</html>
