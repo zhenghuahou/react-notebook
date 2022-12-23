@@ -9,17 +9,22 @@
 			padding: 10px;
 		}
 
+		.box2 {
+			background: url('https://codersblock.com/assets/images/blog/houdini-support-grid.png') !important;
+		}
+
 		* {
 			padding: 0;
 			margin: 0;
 			list-style: none;
 		}
 
-		.bfc{
+		.bfc {
 			overflow: scroll;
 			background-color: #999;
-			margin:  20px;
+			margin: 20px;
 		}
+
 		.box {
 			width: 100px;
 			height: 100px;
@@ -94,33 +99,41 @@
 		<article class="child"></article>
 	</section>
 
-	<br/>
+	<br />
 
 	<section id="layout">
-        <style media="screen">
-            #layout {
-                background: red;
-            }
-            #layout .left {
-                float: left;
-                width: 100px;
-                height: 100px;
-                background: pink;
-            }
-            #layout .right {
-                height: 110px;
-                background: #ccc;
+		<style media="screen">
+			#layout {
+				background: red;
+			}
+
+			#layout .left {
+				float: left;
+				width: 100px;
+				height: 100px;
+				background: pink;
+			}
+
+			#layout .right {
+				height: 110px;
+				background: #ccc;
 				overflow: scroll;
 				/* overflow: hidden; */
-            }
-        </style>
-        <div class="left"></div>
-        <div class="right">
+			}
+		</style>
+		<div class="left"></div>
+		<div class="right">
 			我们看这里的2，它的上下外边距都没有与1和3发生重叠，但3与4外边距发生了重叠。这就解释了BFC创建了一个独立的环境，这个环境中的元素不会影响到其他环境中的布局，所以BFC内的外边距不与外部的外边距发生重叠。
 		</div>
-    </section>
+	</section>
 	<br />
 	<a href="https://segmentfault.com/a/1190000013069516">参考网址</a>
+	<script>
+		// setTimeout(() => {
+		// 	var element = document.body;
+		// 	element.classList.add("box2");
+		// }, 3000)
+	</script>
 </body>
 
 </html>

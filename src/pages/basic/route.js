@@ -12,6 +12,7 @@ import HashAndHistory from './hash&history'
 import Instanceof from './instanceof'
 import AddBigNumber from './addBigNumber'
 import Promise from './promise'
+import RequestIdleCallback from './requestIdleCallback'
 
 const genConfig = function () {
   const config = [
@@ -79,6 +80,10 @@ const genConfig = function () {
       path: "promise",
       element: <Promise />,
       title: 'Promise原理'
+    }, {
+      path: "requestIdleCallback",
+      element: <RequestIdleCallback />,
+      title: 'requestIdleCallback demo'
     }];
 
   config.map(item => {
