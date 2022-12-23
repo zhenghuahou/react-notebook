@@ -13,6 +13,7 @@ import Instanceof from './instanceof'
 import AddBigNumber from './addBigNumber'
 import Promise from './promise'
 import RequestIdleCallback from './requestIdleCallback'
+import EventLoop from './event-loop'
 
 const genConfig = function () {
   const config = [
@@ -84,6 +85,10 @@ const genConfig = function () {
       path: "requestIdleCallback",
       element: <RequestIdleCallback />,
       title: 'requestIdleCallback demo'
+    },{
+      path: "EventLoop",
+      element: <EventLoop />,
+      title: 'EventLoop demo'
     }];
 
   config.map(item => {
