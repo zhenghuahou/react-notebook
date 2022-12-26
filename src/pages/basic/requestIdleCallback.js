@@ -1,7 +1,7 @@
 import Highlight from '../../components/highlight';
 
 
-export default function AddBigNumber() {
+export default function RequestIdleCallbackDemo() {
 
     const code = `
         const taskList = [];

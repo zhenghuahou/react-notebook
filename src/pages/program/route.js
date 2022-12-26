@@ -2,6 +2,7 @@ import ArrayToRemoveDuplicates from './arrayToRemoveDuplicates'
 import ArrayFlat from './arrayFlat'
 import Curry from './curry'
 import NumFormat from './numFormat'
+import Throttle from './throttle'
 
 const genConfig = function () {
     const config = [
@@ -23,6 +24,11 @@ const genConfig = function () {
             path: "numFormat",
             element: <NumFormat />,
             title: '千位分隔符实现'
+        },
+        {
+            path: "throttle",
+            element: <Throttle />,
+            title: '函数节流'
         }
     ];
 
