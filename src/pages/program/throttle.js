@@ -194,7 +194,7 @@ function throttle(func, wait, options) {
 
 window.addEventListener('load', function () {
   var count = 1;
-  var container = document.getElementById('id1');
+  var container1 = document.getElementById('id1');
   var container2 = document.getElementById('id2');
   var container3 = document.getElementById('id3');
   var container4 = document.getElementById('id4');
@@ -205,7 +205,7 @@ window.addEventListener('load', function () {
     this.innerHTML = count++;
   };
 
-  container.onmousemove = getUserAction;
+  container1.onmousemove = getUserAction;
 
   //当鼠标移入的时候，事件立刻执行,每过 1s 会执行一次，如果在 4.2s 停止触发，以后不会再执行事件
   container2.onmousemove = throttleA(getUserAction, 1000);

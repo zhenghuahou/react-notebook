@@ -3,6 +3,7 @@ import ArrayFlat from './arrayFlat'
 import Curry from './curry'
 import NumFormat from './numFormat'
 import Throttle from './throttle'
+import Debounce from './debounce'
 
 const genConfig = function () {
     const config = [
@@ -29,6 +30,11 @@ const genConfig = function () {
             path: "throttle",
             element: <Throttle />,
             title: '函数节流'
+        },
+        {
+            path: "Debounce",
+            element: <Debounce />,
+            title: '函数防抖'
         }
     ];
 
