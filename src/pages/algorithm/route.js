@@ -10,6 +10,7 @@ import ReverseString from './reverseString'
 import MaxDepth from './maxDepth'
 import HasCycle from './hasCycle'
 import GetSmallestString from './getSmallestString'
+import ShortestToChar from './shortestToChar'
 
 const genConfig = function () {
   const config = [
@@ -52,6 +53,11 @@ const genConfig = function () {
       path: "reverseString",
       element: <ReverseString />,
       title: '反转字符串'
+    },
+    {
+      path: "ShortestToChar",
+      element: <ShortestToChar />,
+      title: '字符的最短距离'
     },
     {
       path: "maxDepth",
