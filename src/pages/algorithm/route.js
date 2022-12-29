@@ -11,6 +11,7 @@ import MaxDepth from './maxDepth'
 import HasCycle from './hasCycle'
 import GetSmallestString from './getSmallestString'
 import ShortestToChar from './shortestToChar'
+import CheckValidString from './checkValidString'
 
 const genConfig = function () {
   const config = [
@@ -78,6 +79,11 @@ const genConfig = function () {
       path: "getSmallestString",
       element: <GetSmallestString />,
       title: '贪心：具有给定数值的最小字符串'
+    },
+    {
+      path: "checkValidString",
+      element: <CheckValidString />,
+      title: '有效的括号字符串'
     }
   ];
 
