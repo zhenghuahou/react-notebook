@@ -6,6 +6,7 @@ import Bind from './bind'
 import New from './new'
 import ObjectCreate from './objectCreate'
 import Proxy from './proxy'
+import Reg from './reg'
 import ShadowDOM from './shadowDOM'
 import ShadowDOMCustomElements from './shadowDOM&customElements'
 import HashAndHistory from './hash&history'
@@ -14,6 +15,7 @@ import AddBigNumber from './addBigNumber'
 import Promise from './promise'
 import RequestIdleCallback from './requestIdleCallback'
 import EventLoop from './event-loop'
+
 
 const genConfig = function () {
   const config = [
@@ -59,6 +61,11 @@ const genConfig = function () {
       path: "proxy",
       element: <Proxy />,
       title: 'proxy / Reflect 相关'
+    },
+    {
+      path: "reg",
+      element: <Reg />,
+      title: '正则表达式'
     },
     {
       path: "shadowDOM",
