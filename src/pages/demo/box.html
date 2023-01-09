@@ -58,6 +58,7 @@
 </head>
 
 <body>
+
 	<pre>
 		js获取dom宽度/高度:dom.getBoundingClientRect().width/height
 	</pre>
@@ -126,6 +127,16 @@
 			我们看这里的2，它的上下外边距都没有与1和3发生重叠，但3与4外边距发生了重叠。这就解释了BFC创建了一个独立的环境，这个环境中的元素不会影响到其他环境中的布局，所以BFC内的外边距不与外部的外边距发生重叠。
 		</div>
 	</section>
+	<script type="text/html" id="user_tmpl">
+		<%for ( var i = 0; i < users.length; i++ ) { %>
+			<li>
+				<a href="<%=users[i].url%>">
+					<%=users[i].name%>
+				</a>
+			</li>
+		<% } %>
+	</script>
+	<div id="container"></div>
 	<br />
 	<a href="https://segmentfault.com/a/1190000013069516">参考网址</a>
 	<script>
@@ -133,6 +144,111 @@
 		// 	var element = document.body;
 		// 	element.classList.add("box2");
 		// }, 3000)
+	</script>
+	<!-- <script>
+		// 模板引擎第一版
+		(function () {
+			this.tmpl = function (str) {
+
+				console.info(' this:', this);
+				var str = document.getElementById(str).innerHTML;
+
+				var string = "var p = []; p.push('" +
+					str
+						.replace(/[\r\t\n]/g, "")
+						.replace(/<%=(.*?)%>/g, "');p.push($1);p.push('")
+						.replace(/<%/g, "');;;;;")
+						.replace(/%>/g, "p.push('")
+					+ "');"
+				console.info(' string:', string)
+
+				eval(string)
+
+				return p.join('');
+			};
+		})();
+
+		var results = document.getElementById("container");
+
+		var users = [
+			{ "name": "Byron", "url": "http://localhost" },
+			{ "name": "Casper", "url": "http://localhost" },
+			{ "name": "Frank", "url": "http://localhost" }
+		]
+
+		results.innerHTML = tmpl("user_tmpl");
+	</script> -->
+	<!-- <script>
+		// 模板引擎第二版
+		(function () {
+			this.tmpl = function (str) {
+
+				var str = document.getElementById(str).innerHTML;
+
+				var fn = new Function("obj",
+
+					"var p = []; p.push('" +
+
+					str
+						.replace(/[\r\t\n]/g, "")
+						.replace(/<%=(.*?)%>/g, "');p.push($1);p.push('")
+						.replace(/<%/g, "');")
+						.replace(/%>/g, "p.push('")
+					+ "');return p.join('');");
+				console.info(' fn:',fn);
+				return fn();
+			};
+		})();
+
+		var results = document.getElementById("container");
+
+		var users = [
+			{ "name": "Byron", "url": "http://localhost" },
+			{ "name": "Casper", "url": "http://localhost" },
+			{ "name": "Frank", "url": "http://localhost" }
+		]
+
+		results.innerHTML = tmpl("user_tmpl");
+	</script> -->
+
+	<script>
+		// 模板引擎第三版
+		(function () {
+			this.tmpl = function (str, data) {
+				var str = document.getElementById(str).innerHTML;
+				var fn = new Function("obj",
+					"var p = []; with(obj){p.push('" +
+
+					str
+						.replace(/[\r\t\n]/g, "")
+						.replace(/<%=(.*?)%>/g, "');p.push($1);p.push('")
+						.replace(/<%/g, "');")
+						.replace(/%>/g, "p.push('")
+					+ "');}return p.join('');");
+				console.info(' fn:', fn)
+				// return fn(data);
+
+				var template = function (data) {
+					console.info('template data:',data)
+					return fn.call(this, data)
+				}
+				return template;
+			};
+		})();
+
+		var results = document.getElementById("container");
+		var data = {
+			users: [
+				{ "name": "Byron", "url": "http://localhost" },
+				{ "name": "Casper", "url": "http://localhost" },
+				{ "name": "Frank", "url": "http://localhost" }
+			]
+		}
+		// results.innerHTML = tmpl("user_tmpl", data2);
+
+		var compiled = tmpl("user_tmpl");
+		console.info(' compiled:',compiled)
+		results.innerHTML = compiled(data);
 	</script>
 </body>
 

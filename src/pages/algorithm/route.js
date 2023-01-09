@@ -12,6 +12,7 @@ import HasCycle from './hasCycle'
 import GetSmallestString from './getSmallestString'
 import ShortestToChar from './shortestToChar'
 import CheckValidString from './checkValidString'
+import LevelOrder from './levelOrder'
 
 const genConfig = function () {
   const config = [
@@ -84,6 +85,11 @@ const genConfig = function () {
       path: "checkValidString",
       element: <CheckValidString />,
       title: '有效的括号字符串'
+    },
+    {
+      path: "LevelOrder",
+      element: <LevelOrder />,
+      title: '二叉树的层序遍历'
     }
   ];
 
