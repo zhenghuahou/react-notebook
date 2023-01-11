@@ -13,6 +13,7 @@ import GetSmallestString from './getSmallestString'
 import ShortestToChar from './shortestToChar'
 import CheckValidString from './checkValidString'
 import LevelOrder from './levelOrder'
+import MergeTwoLists from './mergeTwoLists'
 
 const genConfig = function () {
   const config = [
@@ -90,6 +91,11 @@ const genConfig = function () {
       path: "LevelOrder",
       element: <LevelOrder />,
       title: '二叉树的层序遍历'
+    },
+    {
+      path: "mergeTwoLists",
+      element: <MergeTwoLists />,
+      title: '合并两个排序的链表'
     }
   ];
 

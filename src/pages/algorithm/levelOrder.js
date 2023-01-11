@@ -35,7 +35,7 @@ export default function LevelOrder() {
     <>
       <a href='https://leetcode.cn/problems/binary-tree-level-order-traversal/solutions/244853/bfs-de-shi-yong-chang-jing-zong-jie-ceng-xu-bian-l/'>详细解题网址</a>
       <hr />
-      <h3>解题思路:二叉树的层序遍历</h3>
+      <h3>二叉树的层序遍历</h3>
       <Highlight className="code">
         {code}
       </Highlight>
