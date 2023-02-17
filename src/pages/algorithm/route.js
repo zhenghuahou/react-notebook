@@ -14,6 +14,7 @@ import ShortestToChar from './shortestToChar'
 import CheckValidString from './checkValidString'
 import LevelOrder from './levelOrder'
 import MergeTwoLists from './mergeTwoLists'
+import LRUCache from './LRUCache'
 
 const genConfig = function () {
   const config = [
@@ -96,6 +97,11 @@ const genConfig = function () {
       path: "mergeTwoLists",
       element: <MergeTwoLists />,
       title: '合并两个排序的链表'
+    },
+    {
+      path: "LRUCache",
+      element: <LRUCache />,
+      title: 'LRU 缓存'
     }
   ];
 
