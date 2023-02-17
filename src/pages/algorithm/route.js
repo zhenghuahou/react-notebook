@@ -15,6 +15,7 @@ import CheckValidString from './checkValidString'
 import LevelOrder from './levelOrder'
 import MergeTwoLists from './mergeTwoLists'
 import LRUCache from './LRUCache'
+import IsValidSudoku from './isValidSudoku'
 
 const genConfig = function () {
   const config = [
@@ -102,6 +103,11 @@ const genConfig = function () {
       path: "LRUCache",
       element: <LRUCache />,
       title: 'LRU 缓存'
+    },
+    {
+      path: "isValidSudoku",
+      element: <IsValidSudoku />,
+      title: '有效的数独'
     }
   ];
 
