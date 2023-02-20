@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The difference between width:auto and width:100%</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .test {
+            width: 500px;
+            background-color: #360;
+            height: 300px;
+
+        }
+
+        .a {
+            width: 100%;
+            background-color: aqua;
+            margin: 0 50px;
+            padding: 0 30px;
+            border: 10px solid #555;
+        }
+
+        .b {
+            width: auto;
+            background-color: goldenrod;
+            margin: 0 50px;
+            padding: 0 30px;
+            border: 10px solid #999;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://www.456bereastreet.com/archive/201112/the_difference_between_widthauto_and_width100/">原文</a>
+    <pre>
+    The difference between width:auto and width:100%
+    When adapting a layout for different viewport widths (a.k.a. responsive design) or media (like print), it’s common
+    to reset any float and width values on major layout blocks to linearise their display.
+
+    Unfloating a floated element is as simple as specifying float:none. Width doesn’t seem to be quite as
+    straightforward – lately I’ve come across several cases where people use width:100% to undo explicitly specified
+    widths when they should be using width:auto instead. So here’s a brief explanation of the difference.
+
+    The initial width of a block level element like div or p is auto. This makes it expand to occupy all available
+    horizontal space within its containing block. If it has any horizontal padding or border, the widths of those do not
+    add to the total width of the element. Here’s the CSS 2.1 specification’s formula for block-level, non-replaced
+    elements in normal flow:
+
+    'margin-left' + 'border-left-width' + 'padding-left' + 'width' + 'padding-right' + 'border-right-width' +
+    'margin-right' = width of containing block
+
+    As long as the value of width is auto, the element can have horizontal margin, padding and border without becoming
+    wider than its container (unless of course the sum of margin-left + border-left-width + padding-left + padding-right
+    + border-right-width + margin-right is larger than the container). The width of its content box will be whatever is
+    left when the margin, padding and border have been subtracted from the container’s width.
+
+    On the other hand, if you specify width:100%, the element’s total width will be 100% of its containing block plus
+    any horizontal margin, padding and border (unless you’ve used box-sizing:border-box, in which case only margins are
+    added to the 100% to change how its total width is calculated). This may be what you want, but most likely it isn’t.
+
+    To visualise the difference I made an example: width:auto vs. width:100%.
+
+    So, next time you find yourself setting the width of a block level element to 100% to make it occupy all available
+    width, consider if what you really want is setting it to auto. In most cases it is, and doing so will save you from
+    wondering why the element doesn’t fit inside its container when you give it a horizontal padding or border later on.
+    </pre>
+    <p>
+        也就是说 width:auto是 width of containing block - margin - border - padding计算出来的，如果计算出的宽度小于0，那么最终width值为0<br/>
+        width:100%值就是the containing block's width的值 (没有设置 box-sizing: border-box的情况下)
+    </p>
+    <div class="test">
+        <div class="a">
+            1.-- width: 100%;
+        </div>
+        <div class="b">
+            2.-- width: auto;
+        </div>
+    </div>
+</body>
+
+</html>
