@@ -23,6 +23,7 @@ buf3: <Buffer 01 02 03 04>  buf3.length: buf3.length: 4 十进制: 16909060 16�
 
 const head = Buffer.alloc(8);
 head.writeUInt32BE(2345);//2345转化为16进制为929
-head.writeUInt32BE(10891, 4);//10891转化为16进制为2a8b
+head.writeUInt32BE(10891);//10891转化为16进制为2a8b
 console.info('head:',head)
 //head: <Buffer 00 00 09 29 00 00 2a 8b>
+ 
