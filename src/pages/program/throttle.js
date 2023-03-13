@@ -1,4 +1,4 @@
-import Highlight from '../../components/highlight';
+import Highlight from "../../components/highlight";
 export default function Throttle() {
   const code = `
   // leading：false 表示禁用第一次执行
@@ -43,44 +43,48 @@ export default function Throttle() {
     
     return throttled;
   }
-  `
+  `;
 
   return (
     <>
-      <a href='https://github.com/mqyqingfeng/Blog/issues/26'>参考网址</a><br />
+      <a href="https://github.com/mqyqingfeng/Blog/issues/26">参考网址</a>
+      <br />
       <hr />
-      <div className='demo' id='id1'>
+      <div className="demo" id="id1">
         移上去
       </div>
       <hr />
-      <div className='demo' id='id2'>
+      <div className="demo" id="id2">
         移上去
       </div>
       <hr />
-      <div className='demo' id='id3'>
+      <div className="demo" id="id3">
         移上去
       </div>
       <hr />
-      <div className='demo' id='id4'>
+      <div className="demo" id="id4">
         移上去
       </div>
       <hr />
-      <div className='demo' id='id5'>
+      <div className="demo" id="id5">
         移上去
       </div>
       <p>
-        throttle 和 debounce 的应用场景区分:<br />
-        按一个按钮发送 AJAX：给 click 加了 debounce 后就算用户不停地点这个按钮，也只会最终发送一次；如果是 throttle 就会间隔发送几次
-        监听滚动事件判断是否到页面底部自动加载更多：给 scroll 加了 debounce 后，只有用户停止滚动后，才会判断是否到了页面底部；
-        如果是 throttle 的话，只要页面滚动就会间隔一段时间判断一次
-        <a href='https://github.com/lessfish/underscore-analysis/issues/21'>[参考来源]</a>
+        throttle 和 debounce 的应用场景区分:
+        <br />
+        按一个按钮发送 AJAX：给 click 加了 debounce
+        后就算用户不停地点这个按钮，也只会最终发送一次；如果是 throttle
+        就会间隔发送几次 监听滚动事件判断是否到页面底部自动加载更多：给 scroll
+        加了 debounce 后，只有用户停止滚动后，才会判断是否到了页面底部； 如果是
+        throttle 的话，只要页面滚动就会间隔一段时间判断一次
+        <a href="https://github.com/lessfish/underscore-analysis/issues/21">
+          [参考来源]
+        </a>
       </p>
 
-      <Highlight className="code">
-        {code}
-      </Highlight>
+      <Highlight className="code">{code}</Highlight>
     </>
-  )
+  );
 }
 
 // 使用时间戳
@@ -90,12 +94,12 @@ function throttleA(func, wait) {
 
   return function () {
     // this : dom节点
-    var now = + new Date;
+    var now = +new Date();
     if (now - previous > wait) {
       func.apply(this, arguments);
       previous = now;
     }
-  }
+  };
 }
 
 // 使用定时器
@@ -106,18 +110,24 @@ function throttleB(func, wait) {
 
   return function () {
     // this : dom节点
-    var now = + new Date;
-    console.info('[throttleB] 00  timeout:', timeout)
+    var now = +new Date();
+    console.info("[throttleB] 00  timeout:", timeout);
     if (!timeout) {
       timeout = setTimeout(() => {
-        console.info('[throttleB] 11  this:', this, 'timeout:', timeout, 'arguments:', arguments)
+        console.info(
+          "[throttleB] 11  this:",
+          this,
+          "timeout:",
+          timeout,
+          "arguments:",
+          arguments
+        );
         timeout = null;
-        func.apply(this, arguments)
-      }, wait)
+        func.apply(this, arguments);
+      }, wait);
     }
-  }
+  };
 }
-
 
 function throttleC(func, wait) {
   var previous = 0;
@@ -126,8 +136,8 @@ function throttleC(func, wait) {
 
   return function () {
     // this : dom节点
-    var now = + new Date;
-    var remaining = wait - (now - previous)
+    var now = +new Date();
+    var remaining = wait - (now - previous);
     // 如果没有剩余的时间了或者你改了系统时间
     if (remaining <= 0 || remaining > wait) {
       if (timeout) {
@@ -135,18 +145,16 @@ function throttleC(func, wait) {
         timeout = null;
       }
       previous = now;
-      func.apply(this, arguments)
+      func.apply(this, arguments);
     } else if (!timeout) {
       timeout = setTimeout(() => {
         timeout = null;
-        previous = + new Date;
-        func.apply(this, arguments)
-      }, remaining)
-
+        previous = +new Date();
+        func.apply(this, arguments);
+      }, remaining);
     }
-  }
+  };
 }
-
 
 // leading：false 表示禁用第一次执行
 // trailing: false 表示禁用停止触发的回调
@@ -158,12 +166,12 @@ function throttle(func, wait, options) {
   //this : undefined
   var throttled = function () {
     // this : dom节点
-    var now = + new Date;
-    if (options.leading === false && (!previous)) {
+    var now = +new Date();
+    if (options.leading === false && !previous) {
       // 禁用第一次执行
       previous = now;
     }
-    var remaining = wait - (now - previous)
+    var remaining = wait - (now - previous);
     // console.info('previous:',previous,' =====>remaining:',remaining,' timeout:',timeout)
     // 如果没有剩余的时间了或者你改了系统时间
     if (remaining <= 0 || remaining > wait) {
@@ -172,38 +180,37 @@ function throttle(func, wait, options) {
         timeout = null;
       }
       previous = now;
-      func.apply(this, arguments)
+      func.apply(this, arguments);
     } else if (!timeout && options.trailing !== false) {
       timeout = setTimeout(() => {
         timeout = null;
-        previous = options.leading === false ? 0 : +new Date;
-        func.apply(this, arguments)
-      }, remaining)
+        previous = options.leading === false ? 0 : +new Date();
+        func.apply(this, arguments);
+      }, remaining);
     }
-  }
+  };
 
   throttled.cancel = function () {
     clearTimeout(timeout);
     timeout = null;
     previous = 0;
-  }
+  };
 
   return throttled;
 }
 
-
-window.addEventListener('load', function () {
+window.addEventListener("load", function () {
   var count = 1;
-  var container1 = document.getElementById('id1');
-  var container2 = document.getElementById('id2');
-  var container3 = document.getElementById('id3');
-  var container4 = document.getElementById('id4');
-  var container5 = document.getElementById('id5');
+  var container1 = document.getElementById("id1");
+  var container2 = document.getElementById("id2");
+  var container3 = document.getElementById("id3");
+  var container4 = document.getElementById("id4");
+  var container5 = document.getElementById("id5");
 
   function getUserAction() {
     // console.info(' getUserAction:',this,' arg:',arguments )
     this.innerHTML = count++;
-  };
+  }
 
   container1.onmousemove = getUserAction;
 
@@ -219,4 +226,4 @@ window.addEventListener('load', function () {
 
   container5.onmousemove = throttle(getUserAction, 3000, { leading: false });
   // container5.onmousemove = throttle(getUserAction, 3000, { trailing: false });
-})
+});
