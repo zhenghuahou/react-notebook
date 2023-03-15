@@ -1,8 +1,35 @@
-# Getting Started with Create React App
+### folder structure
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+|---public 静态资源文件
+|---shadowDOM shadowDOM相关代码
+|---node_modules node模块
+|---src 应用源码目录
+|　　|---components 公用组件
+|　　|---index.js 入口文件
+|　　|---App.js 入口主文件
+|　　|---pages 页面
+|　　|　　|---algorithm 算法相关代码
+|　　|　　|---basic js基础知识
+|　　|　　|---core 源码实现相关代码
+|　　|　　|---demo  测试页面
+|　　|　　|---engineering 工程化相关
+|　　|　　|---graphQL graphQL相关
+|　　|　　|---network 网络相关
+|　　|　　|---node node相关
+|　　|　　|---performance 性能相关
+|　　|　　|---program 编程案例
+|　　|　　|---react react相关
+|　　|　　|---webgl webgl相关
+|---.eslintrc.json eslint配置
+|---.commitlintrc  commitlint配置
+|---.editorconfig  编辑器配置
+|---.gitignore     git忽略配置
+|---package.json   npm配置
+|---README.md 项目自述
+```
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
@@ -28,16 +55,6 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
 ## Learn More
 
