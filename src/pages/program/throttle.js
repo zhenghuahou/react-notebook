@@ -50,23 +50,23 @@ export default function Throttle() {
       <a href="https://github.com/mqyqingfeng/Blog/issues/26">参考网址</a>
       <br />
       <hr />
-      <div className="demo" id="id1">
+      <div className="demo" id="id11">
         移上去
       </div>
       <hr />
-      <div className="demo" id="id2">
+      <div className="demo" id="id22">
         移上去
       </div>
       <hr />
-      <div className="demo" id="id3">
+      <div className="demo" id="id33">
+        移上去(3)
+      </div>
+      <hr />
+      <div className="demo" id="id44">
         移上去
       </div>
       <hr />
-      <div className="demo" id="id4">
-        移上去
-      </div>
-      <hr />
-      <div className="demo" id="id5">
+      <div className="demo" id="id55">
         移上去
       </div>
       <p>
@@ -201,11 +201,11 @@ function throttle(func, wait, options) {
 
 window.addEventListener("load", function () {
   var count = 1;
-  var container1 = document.getElementById("id1");
-  var container2 = document.getElementById("id2");
-  var container3 = document.getElementById("id3");
-  var container4 = document.getElementById("id4");
-  var container5 = document.getElementById("id5");
+  var container1 = document.getElementById("id11");
+  var container2 = document.getElementById("id22");
+  var container3 = document.getElementById("id33");
+  var container4 = document.getElementById("id44");
+  var container5 = document.getElementById("id55");
 
   function getUserAction() {
     // console.info(' getUserAction:',this,' arg:',arguments )
