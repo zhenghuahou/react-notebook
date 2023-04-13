@@ -1,4 +1,3 @@
-import { symbol } from "lighthouse/lighthouse-core/gather/gatherers/trace";
 import Highlight from "../../components/highlight";
 export default function AddBigNumber() {
   const code = `

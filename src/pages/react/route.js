@@ -5,6 +5,7 @@ import BeforeYouMemo from './beforeYouMemo'
 import Memo from './memo'
 import Demanhook from './demanhook'
 import Event from './event'
+import useRefUseCallback from './useRef&useCallback'
 
 const genConfig = function () {
   const config = [
@@ -42,6 +43,11 @@ const genConfig = function () {
       path: "event",
       title: 'React合成事件',
       element: <Event />,
+    },
+    {
+      path: "useRefUseCallback",
+      title: 'useRefUseCallback',
+      element: <useRefUseCallback />,
     }
   ];
 
