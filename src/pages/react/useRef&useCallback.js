@@ -15,6 +15,8 @@ const usePrevProps = value => {
     const [total, setTotal] = React.useState(0);
     const handleCountA = () => setCount(count => count + 1);
     const handleCountB = React.useCallback(() => setCount(count => count + 1), []);
+    // 效果等同于handleCountB,AnotherComponent都不会重新多次渲染
+    const handleCountC = React.useMemo(()=>() => setCount(count => count + 1), []);
     const handleTotal = () => setTotal(total + 1);
     const prevHandleCountA = usePrevProps(handleCountA);
     const prevHandleCountB = usePrevProps(handleCountB);
@@ -41,17 +43,20 @@ const usePrevProps = value => {
           <button onClick={handleTotal}>Increment Total</button>
         </div>
         <AnotherComponent onClick={handleCountB} />
+        {/* <AnotherComponent onClick={handleCountC} /> */}
+        {/* <AnotherComponent onClick={handleCountA} /> */}
       </div>
     )
   }
   
   //memo lets you skip re-rendering a component when its props are unchanged.
+  //  React.memo加了之后，多次点击3个按钮都不会重新渲染
   const AnotherComponent = React.memo(function AotherComponent({ onClick }) {
     console.log('AotherComponent 组件渲染');
     return (
-      <button onClick={onClick}>AotherComponent - Inrement Count(handleCount被useCallback包裹了)</button>
+      <button onClick={onClick}>AotherComponent - handleCountB - Inrement Count(handleCount被useCallback包裹了)</button>
     )
-  })
+  });
   
   ReactDOM.render(<App />, document.body)
   
