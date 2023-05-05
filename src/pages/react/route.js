@@ -1,3 +1,11 @@
+/*
+ * @Author: zhenghuahou 2430370966@qq.com
+ * @Date: 2023-05-05 15:25:17
+ * @LastEditors: zhenghuahou 2430370966@qq.com
+ * @LastEditTime: 2023-05-05 15:59:13
+ * @FilePath: /fe-notebook/src/pages/react/route.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import SetState18 from './setState-18'
 import UseLayoutEffect from './useLayoutEffect'
 import SetState from './setState'
@@ -5,7 +13,7 @@ import BeforeYouMemo from './beforeYouMemo'
 import Memo from './memo'
 import Demanhook from './demanhook'
 import Event from './event'
-import useRefUseCallback from './useRef&useCallback'
+// import useRefUseCallback from './useRef&useCallback'
 
 const genConfig = function () {
   const config = [
@@ -44,11 +52,11 @@ const genConfig = function () {
       title: 'React合成事件',
       element: <Event />,
     },
-    {
-      path: "useRefUseCallback",
-      title: 'useRefUseCallback',
-      element: <useRefUseCallback />,
-    }
+    // {
+    //   path: "useRefUseCallback",
+    //   title: 'useRefUseCallback',
+    //   element: <useRefUseCallback />,
+    // }
   ];
 
   config.map(item => {

@@ -14,6 +14,11 @@ import Program, { routeConfig as ProgramRouteConfig } from './pages/program'
 import Algorithm, { routeConfig as AlgorithmRouteConfig } from './pages/algorithm'
 import Network, { routeConfig as NetworkRouteConfig } from './pages/network'
 
+
+
+export const FormContext = React.createContext(null)
+console.info(' FormContext:',FormContext);
+
 const routerCfg = [
   {
     path: "basic",
