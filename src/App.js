@@ -13,11 +13,12 @@ import Engineering, { routeConfig as EngineeringRouteConfig } from './pages/engi
 import Program, { routeConfig as ProgramRouteConfig } from './pages/program'
 import Algorithm, { routeConfig as AlgorithmRouteConfig } from './pages/algorithm'
 import Network, { routeConfig as NetworkRouteConfig } from './pages/network'
+import A from './formilyDemo';
 
 
 
 export const FormContext = React.createContext(null)
-console.info(' FormContext:',FormContext);
+console.info(' FormContext:',FormContext,'typeof FormContext:',typeof FormContext);
 
 const routerCfg = [
   {
@@ -89,6 +90,7 @@ function Layout() {
     <>
       <p className="pd10">
         <b>demo演示</b>
+        <A></A>
       </p>
       <nav className="nav">
         {routerCfg.map(r => {
