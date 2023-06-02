@@ -2,7 +2,7 @@
  * @Author: zhenghuahou 2430370966@qq.com
  * @Date: 2023-05-05 15:25:17
  * @LastEditors: zhenghuahou 2430370966@qq.com
- * @LastEditTime: 2023-05-05 15:59:13
+ * @LastEditTime: 2023-05-14 15:29:54
  * @FilePath: /fe-notebook/src/pages/react/route.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -13,6 +13,7 @@ import BeforeYouMemo from './beforeYouMemo'
 import Memo from './memo'
 import Demanhook from './demanhook'
 import Event from './event'
+import BatchUpdateWithReact18 from './batchUpdateWithReact18'
 // import useRefUseCallback from './useRef&useCallback'
 
 const genConfig = function () {
@@ -52,11 +53,11 @@ const genConfig = function () {
       title: 'React合成事件',
       element: <Event />,
     },
-    // {
-    //   path: "useRefUseCallback",
-    //   title: 'useRefUseCallback',
-    //   element: <useRefUseCallback />,
-    // }
+    {
+      path: "batchUpdateWithReact18",
+      title: 'batchUpdateWithReact18',
+      element: <BatchUpdateWithReact18 />,
+    }
   ];
 
   config.map(item => {
