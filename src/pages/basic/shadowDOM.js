@@ -13,7 +13,7 @@ export default function ShadowDOM() {
   )
 }
 
-;(function () {
+(function () {
   class MyWebComponent extends HTMLElement {
     constructor() {
       super();

@@ -25,7 +25,7 @@ export default function New() {
     return  /b/
   }
   createObj(test)  // ƒ bb() { }
-  createObj(test2) // test2 {}
+  createObj(test2) // test2{}
   createObj(test3) // []
   createObj(test4) // /b/
   `

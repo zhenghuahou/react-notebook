@@ -39,7 +39,7 @@ function ParentFunction() {
       }}>increase count</button>
       <ChildFunction name='t0' >ChildFunction组件没有被memo包裹!点击上面的按钮，我会渲染多次</ChildFunction>
       <p>ChildF是被memo包裹的组件</p>
-      <ChildF name='t1' onClick={() => { }}>(memo)点击上面的按钮，我会渲染多次</ChildF>
+      <ChildF name='t1' onClick={() => { console.info(1)}}>(memo)点击上面的按钮，我会渲染多次</ChildF>
       <ChildF name='t2' onClick={a}>(memo+useCallback)点击上面的按钮，我不会重新渲染</ChildF>
     </div>
   );
