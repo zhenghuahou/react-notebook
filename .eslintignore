@@ -1,0 +1,6 @@
+dist/
+build/
+assets/
+typings/
+config/
+*.test.js
