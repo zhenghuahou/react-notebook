@@ -20,6 +20,7 @@ import A from './formilyDemo';
 export const FormContext = React.createContext(null)
 console.info(' FormContext:',FormContext,'typeof FormContext:',typeof FormContext);
 
+
 const routerCfg = [
   {
     path: "basic",
@@ -90,7 +91,7 @@ function Layout() {
     <>
       <p className="pd10">
         <b>demo演示</b>
-        <A></A>
+        <p className="less-test">lesee demo</p>
       </p>
       <nav className="nav">
         {routerCfg.map(r => {

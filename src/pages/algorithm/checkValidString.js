@@ -85,6 +85,7 @@ export default function CheckValidString() {
  * @param {string} s
  * @return {boolean}
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 var checkValidString = function (s) {
   let minCount = 0;
   let maxCount = 0;

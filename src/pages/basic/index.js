@@ -1,7 +1,7 @@
 import {
     Outlet, Link, Route,
 } from "react-router-dom";
-import routeConfig from './route'
+import routeConfig  from './route'
 
 export { default as routeConfig } from './route'
 

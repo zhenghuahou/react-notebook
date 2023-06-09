@@ -60,9 +60,8 @@ function ParentFunction() {
       >
         (memo)点击上面的按钮，我会渲染多次
       </ChildF>
-      <ChildF name="t2" onClick={a}>
-        (memo+useCallback)点击上面的按钮，我不会重新渲染
-      </ChildF>
+      <ChildF name='t1' onClick={() => { console.info(1)}}>(memo)点击上面的按钮，我会渲染多次</ChildF>
+      <ChildF name='t2' onClick={a}>(memo+useCallback)点击上面的按钮，我不会重新渲染</ChildF>
     </div>
   );
 }
