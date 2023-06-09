@@ -14,6 +14,7 @@ import Program, { routeConfig as ProgramRouteConfig } from './pages/program'
 import Algorithm, { routeConfig as AlgorithmRouteConfig } from './pages/algorithm'
 import Network, { routeConfig as NetworkRouteConfig } from './pages/network'
 
+
 const routerCfg = [
   {
     path: "basic",
@@ -84,6 +85,7 @@ function Layout() {
     <>
       <p className="pd10">
         <b>demo演示</b>
+        <p className="less-test">lesee demo</p>
       </p>
       <nav className="nav">
         {routerCfg.map(r => {
