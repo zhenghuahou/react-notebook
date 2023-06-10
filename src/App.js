@@ -83,9 +83,10 @@ export default function App() {
 function Layout() {
   return (
     <>
-      <p className="pd10">
+      <p className="pd10 fz-12">
         <b>demo演示</b>
-        <p className="less-test">lesee demo</p>
+        <p className="less-test">less demo</p>
+        <p className="calc-test">calc demo</p>
       </p>
       <nav className="nav">
         {routerCfg.map(r => {
