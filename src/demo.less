@@ -4,3 +4,15 @@
   &:extend(.style1-ref);
   color:#333600;
 }
+
+
+@asideWidth: 30px;
+
+.fz-12{
+  font-size: 12px;
+}
+.calc-test {
+  width: calc(100% - @asideWidth); //等同于 calc(100% - 30px);
+  // width:calc(100% - 250px - 1.5em);
+  // width:calc(~"100% - 250px - 1.5em"); //等同于width:calc(100% - 250px - 1.5em);不需要再用`~`转义了
+}

@@ -29,3 +29,9 @@ $ git pull origin next
 $ git fetch origin
 $ git merge origin/next
 ```
+
+
+回退上个版本
+```bash
+git reset --hard HEAD^ 
+```
