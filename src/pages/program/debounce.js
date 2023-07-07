@@ -52,6 +52,11 @@ export default function Debounce() {
 
   return (
     <>
+      <h3>
+        <a href="https://css-tricks.com/the-difference-between-throttling-and-debouncing/">
+          The Difference Between Throttling and Debouncing
+        </a>
+      </h3>
       <a href="https://github.com/mqyqingfeng/Blog/issues/22">参考网址1</a>
       <br />
       <a href="https://github.com/lessfish/underscore-analysis/issues/21">
