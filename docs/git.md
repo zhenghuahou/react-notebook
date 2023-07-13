@@ -35,3 +35,8 @@ $ git merge origin/next
 ```bash
 git reset --hard HEAD^ 
 ```
+
+检出分支
+```bash
+git checkout 
+```
