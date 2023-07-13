@@ -40,3 +40,8 @@ git reset --hard HEAD^
 ```bash
 git checkout 
 ```
+
+查看本地分支与远程分支关联关系
+```bash
+git branch -vv
+```
