@@ -52,3 +52,20 @@ git checkout -
 ```
 
 
+
+
+
+tips:如果新建的分支和远端的分支名字不一样，第一个push的时候，会有下面提示，按照提示
+运行`git push origin HEAD:dev`即可。
+`
+git  push                          
+fatal: The upstream branch of your current branch does not match
+the name of your current branch.  To push to the upstream branch
+on the remote, use
+
+    git push origin HEAD:dev
+
+To push to the branch of the same name on the remote, use
+
+    git push origin HEAD
+`
