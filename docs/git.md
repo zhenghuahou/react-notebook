@@ -30,18 +30,25 @@ $ git fetch origin
 $ git merge origin/next
 ```
 
-回退上个版本
+`回退上个版本`
 ```bash
 git reset --hard HEAD^ 
 ```
 
-检出分支
+`检出分支`
 ```bash
 # 从远端origin/dev 检出本地分支local，并自动跟踪远端origin/dev分支
 git checkout -b local  origin/dev 
 ```
 
-查看本地分支与远程分支关联关系
+`查看本地分支与远程分支关联关系`
 ```bash
 git branch -vv
 ```
+
+`切换到上一个操作过的分支`
+```bash
+git checkout -
+```
+
+
