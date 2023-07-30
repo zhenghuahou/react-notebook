@@ -10,17 +10,17 @@
     <div class="class">
       <h4>下载图片的几种方法:</h4>
       <section>
-        <p>方法一:saveAs方法(canvas.toDataURL): 下载的图片大小跟原图保持一致</p>
+        <p>方法一:saveAs方法(canvas.toDataURL): 下载的图片体积跟原图保持一致</p>
         <button id="button">下载图片(saveAs)</button>
       </section>
       <hr />
       <section>
-        <p>方法二:downLoadImgByUrl方法(canvas.toDataURL),可以对下载的图片进行压缩,入股不压缩，下载下来的图片要比原图大</p>
+        <p>方法二:downLoadImgByUrl方法(canvas.toDataURL),可以对下载的图片进行压缩,如果不压缩，下载下来的图片有可能要比原图体积大(具体与图片类型也有关)</p>
         <button id="button2">下载图片(downLoadImgByUrl)</button>
       </section>
       <hr />
       <section>
-        <p>方法三:downloadByBlob方法(canvas.toBlob): 下载下来的图片体积略大于原图，没法压缩图片</p>
+        <p>方法三:downloadByBlob方法(canvas.toBlob): 下载的时候没法压缩图片</p>
         <button id="button3">下载图片(downloadByBlob)</button>
       </section>
     </div>
@@ -39,24 +39,24 @@
       } from "./module/download.js";
 
       document.getElementById("button").onclick = () => {
-        saveAs("/assets/test.jpeg"); //ok
+        // saveAs("/assets/test.jpeg"); //ok
 
-        // saveAs(
-        //   "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
-        // ); //ok
+        saveAs(
+          "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
+        ); //ok
       };
       document.getElementById("button2").onclick = () => {
-        downLoadImgByUrl("/assets/test.jpeg"); //ok
-        // downLoadImgByUrl(
-        //   "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
-        // ); //ok
+        // downLoadImgByUrl("/assets/test.jpeg"); //ok
+        downLoadImgByUrl(
+          "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
+        ); //ok
       };
       document.getElementById("button3").onclick = () => {
-        downloadByBlob("/assets/test.jpeg"); //ok
+        // downloadByBlob("/assets/test.jpeg"); //ok
 
-        // downloadByBlob(
-        //   "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
-        // ); //ok
+        downloadByBlob(
+          "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
+        ); //ok
       };
       document.getElementById("button4").onclick = () => {
         downloadTxt(

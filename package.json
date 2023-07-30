@@ -1,7 +1,11 @@
 {
-  "name": "tinymce-react-demo",
+  "name": "fe-notebook",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhenghuahou/fe-notebook"
+  },
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
