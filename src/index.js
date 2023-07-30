@@ -5,6 +5,8 @@ import './demo.less';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import  './pages/crypto/gm-crypto-demo.js'
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
