@@ -16,7 +16,6 @@
         height: 2000px;
       }
       .signature-pad-form {
-        /* max-width: 300px; */
         margin: 0 auto;
       }
 
@@ -73,10 +72,14 @@
         canvas,
         width: 500,
         height: 500,
-        lineWidth: 3,
+        lineWidth: 5,
         lineCap: "round",
         lineJoin: "round",
-        strokeStyle:'blue'
+        strokeStyle:'#360',
+        shadowOffsetX:4,
+        shadowOffsetY:4,
+        shadowBlur:3,
+        shadowColor:'rgba(0,0,0, 0.2)',
       }));
 
       clearButton.addEventListener("click", (event) => {
@@ -88,7 +91,6 @@
         event.preventDefault();
         const imageURL = sign.getDataURL();
         const image = document.createElement("img");
-        console.info(' image:',image);
         image.src = imageURL;
         image.height = canvas.height;
         image.width = canvas.width;

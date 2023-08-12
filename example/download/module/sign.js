@@ -23,6 +23,9 @@ class BaseSign {
     canvas.width = width;
     canvas.height = height;
     const ctx = canvas.getContext("2d");
+
+    console.info('ctx:',ctx)
+
     this.initAttrs(ctx, attrs);
     this.canvas = canvas;
     this.ctx = ctx;
@@ -60,7 +63,7 @@ class BaseSign {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  getDataURL(){
+  getDataURL() {
     return this.canvas.toDataURL();
   }
 }
@@ -79,8 +82,8 @@ class PcSign extends BaseSign {
   }
 
   getCursorPosition(event) {
-    const clientRect = this.canvas.getBoundingClientRect() ;
-    const positionX = event.clientX -  clientRect.x;
+    const clientRect = this.canvas.getBoundingClientRect();
+    const positionX = event.clientX - clientRect.x;
     const positionY = event.clientY - clientRect.y;
     return [positionX, positionY];
   }
@@ -101,7 +104,7 @@ class MobileSign extends BaseSign {
 
   getCursorPosition(event) {
     //获取canvas相对可视区域的偏移量
-    const clientRect = this.canvas.getBoundingClientRect() ;
+    const clientRect = this.canvas.getBoundingClientRect();
     const point = event.targetTouches[0];
     const positionX = point.clientX - clientRect.x;
     const positionY = point.clientY - clientRect.y;
