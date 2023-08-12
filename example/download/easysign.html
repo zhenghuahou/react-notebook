@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Singature Pad</title>
+    <style>
+      :root {
+        --primary-color: #000;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.4;
+        padding: 1rem;
+        height: 2000px;
+      }
+      .signature-pad-form {
+        /* max-width: 300px; */
+        margin: 0 auto;
+      }
+
+      .canvas {
+        width: 500px;
+        height: 500px;
+        background-color: rgba(200, 150, 60, 0.5);
+      }
+      .signature-pad {
+        cursor: url(pen.png) 1 26, pointer;
+        border: 2px solid var(--primary-color);
+        border-radius: 4px;
+        width: 500px;
+        height: 500px;
+        background-color: rgba(200, 150, 60, 0.5);
+      }
+      .mod-button {
+        color: var(--primary-color);
+        margin-right: 10px;
+      }
+      .submit-button {
+        width: 100%;
+        background-color: var(--primary-color);
+        border: none;
+        padding: 0.5rem 1rem;
+        color: #fff;
+        cursor: pointer;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <form class="signature-pad-form" action="#" method="POST">
+      <h1>Important Contract</h1>
+      <p>Important contract description</p>
+      <p><b>Signature</b></p>
+      <canvas height="100" width="300" class="signature-pad"></canvas>
+      <p><a href="#" class="mod-button clear-button">Clear</a> <a href="#"
+         class="mod-button preview-btn">preview</a></p>
+      <!-- <button class="submit-button" type="submit">SUBMIT</button> -->
+    </form>
+    <div class="preview">
+
+    </div>
+    <script type="module">
+      import Sign from "./module/sign.js";
+      const canvas = document.querySelector("canvas");
+      const form = document.querySelector(".signature-pad-form");
+      const preview = document.querySelector(".preview");
+      const previewBtn = document.querySelector(".preview-btn");
+      const clearButton = document.querySelector(".clear-button");
+
+      const sign = (window.abc = new Sign({
+        canvas,
+        width: 500,
+        height: 500,
+        lineWidth: 3,
+        lineCap: "round",
+        lineJoin: "round",
+        strokeStyle:'blue'
+      }));
+
+      clearButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        sign.clear();
+      });
+
+      previewBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        const imageURL = sign.getDataURL();
+        const image = document.createElement("img");
+        console.info(' image:',image);
+        image.src = imageURL;
+        image.height = canvas.height;
+        image.width = canvas.width;
+        image.style.display = "block";
+        preview.appendChild(image)
+        sign.clear();
+      });
+    </script>
+  </body>
+</html>
