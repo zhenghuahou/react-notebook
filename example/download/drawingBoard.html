@@ -28,7 +28,7 @@
         display: flex;
         align-items: center;
       }
-      .color-input {
+      .mr-5 {
         margin-right: 5px;
       }
       .color-descri {
@@ -50,7 +50,7 @@
         background-color: rgba(200, 150, 60, 0.5);
       }
       .drawing-board {
-        cursor: url(./public/dog.png) 100 26, pointer;
+        /* cursor: url(./public/dog.png) 100 26, pointer; */
         border-radius: 4px;
         background-color: #fff;
         box-shadow: 0 2px 4px 6px rgba(0, 0, 0, 0.1);
@@ -80,7 +80,7 @@
     <p class="flex-center">
       <span class="color-descri">set canvas bg(设置画布背景)</span>
       <input
-        class="color-input"
+        class="mr-5"
         type="color"
         id="canvasColor"
         name="canvasColor"
@@ -91,7 +91,7 @@
     <p class="flex-center">
       <span class="color-descri">set text color (设置文本颜色)</span>
       <input
-        class="color-input"
+        class="mr-5"
         type="color"
         id="textColor"
         name="textColor"
@@ -102,7 +102,7 @@
     <p class="flex-center">
       <span class="color-descri">set stroke color (设置线条颜色)</span>
       <input
-        class="color-input"
+        class="mr-5"
         type="color"
         id="strokeColor"
         name="strokeColor"
@@ -144,6 +144,11 @@
       <label for="shadow">shadow(开启投影)</label>
     </div>
 
+    <div class="mt-10 flex-center">
+      <input type="checkbox" id="sign" name="sign"  class="mr-5"/>
+      <label for="sign">sign(开启手写)</label>
+    </div>
+
     <p class="mt-10">
       <input type="file" accept="image/*,.pdf" id="uploader" />
       <a href="#" class="mod-button clear-button">Clear(清空)</a>
@@ -169,6 +174,7 @@
       const shadowCheckInput = document.querySelector("#shadow");
       const lineWidthInput = document.querySelector("#lineWidth");
       const linewidthValueDom = document.querySelector(".linewidth-value");
+      const signInput = document.querySelector("#sign");
 
       const drawer = new Sign({
         canvas,
@@ -267,6 +273,11 @@
             shadowOffsetY: 0,
           });
         }
+      });
+
+      signInput.addEventListener("change", () => {
+        console.info(' signInput.checked:',signInput.checked)
+          drawer.signMode = signInput.checked? true:false;
       });
     </script>
   </body>

@@ -24,26 +24,22 @@ class BaseSign {
     canvas.height = height;
     const ctx = canvas.getContext("2d");
 
+    window.ctx = ctx;
+
     this.canvas = canvas;
     this.ctx = ctx;
     this.updateAttrs(attrs);
 
-    // if (fillStyle) {
-    //   this.setCanvasBg(fillStyle);
-    // }
     this.writingMode = false;
-
+    this.draggable = false;
+    this.signMode = false;
     this.input = null;
-  }
 
-  // setCanvasBg(fillStyle) {
-  //   const _fillStyle = fillStyle || this.fillStyle ;
-  //   if (_fillStyle) {
-  //     this.fillStyle = _fillStyle;
-  //     this.ctx.fillStyle = _fillStyle;
-  //     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  //   }
-  // }
+    this.currentX = 0;
+    this.currentY = 0;
+
+    this.stickerImg = null;
+  }
 
   updateAttrs(attrs = {}) {
     const { ctx } = this;
@@ -72,8 +68,8 @@ class BaseSign {
       this.input = input;
     }
 
-    const extraX = parseInt(positionX, 10);
-    const extraY = parseInt(positionY, 10);
+    const extraX = positionX;
+    const extraY = positionY;
     console.info("[renderInput] positionX, positionY:", positionX, positionY);
     input.style.left = extraX + "px";
     input.style.top = extraY + "px";
@@ -105,6 +101,11 @@ class BaseSign {
   };
 
   handleDown = (event) => {
+    console.info(' @@@@@@@@@@@@@@@@@@',this.signMode
+    )
+    if(!this.signMode){
+      return;
+    }
     event.preventDefault();
     this.writingMode = true;
     this.ctx.beginPath();
@@ -113,11 +114,17 @@ class BaseSign {
   };
 
   handleUp = (event) => {
+    if(!this.signMode){
+      return;
+    }
     event.preventDefault();
     this.writingMode = false;
   };
 
   handleMove = (event) => {
+    if(!this.signMode){
+      return;
+    }
     event.preventDefault();
     if (!this.writingMode) return;
     const [positionX, positionY] = this.getCursorPosition(event);
@@ -125,19 +132,97 @@ class BaseSign {
     this.ctx.stroke();
   };
 
+  mouseDown = (event) => {
+    const { stickerImg } = this;
+    const [positionX, positionY] = this.getCursorPosition(event);
+    if (!stickerImg) {
+      return console.info("没有图片");
+    }
+    if (
+      positionX >= this.currentX - stickerImg.width / 2 &&
+      positionX <= this.currentX + stickerImg.width / 2 &&
+      positionY >= this.currentY - stickerImg.height / 2 &&
+      positionY <= this.currentY + stickerImg.height / 2
+    ) {
+      this.draggable = true;
+    } else {
+      console.info("不在图片区域");
+    }
+  };
+
+  mouseMove = (event) => {
+    if (!this.draggable) return;
+    const [positionX, positionY] = this.getCursorPosition(event);
+    console.info(
+      " mousemove positionX, positionY:",
+      positionX,
+      positionY,
+      " this.draggable:",
+      this.draggable,
+      "(this.draggerTimeID:",
+      this.draggerTimeID
+    );
+    if (this.draggable) {
+      this.currentX = positionX;
+      this.currentY = positionY;
+    }
+  };
+  mouseUp = (event) => {
+    const [positionX, positionY] = this.getCursorPosition(event);
+    console.info(
+      "mouseUp=========> positionX, positionY",
+      positionX,
+      positionY,
+      "draggerTimeID:",
+      this.draggerTimeID
+    );
+    this.draggable = false;
+    // clearInterval(this.draggerTimeID);
+  };
+  dragImg() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.drawImage(
+      this.stickerImg,
+      this.currentX - this.stickerImg.width / 2,
+      this.currentY - this.stickerImg.height / 2
+    );
+  }
+  mouseOut = (event) => {
+    const [positionX, positionY] = this.getCursorPosition(event);
+    console.info(
+      "mouseOut =========>  positionX, positionY",
+      positionX,
+      positionY,
+      "draggerTimeID:",
+      this.draggerTimeID
+    );
+    this.draggable = false;
+    // clearInterval(this.draggerTimeID);
+  };
+
   drawImage = (file) => {
     let img = new Image();
     const url = URL.createObjectURL(file);
-    const url2 = URL.createObjectURL(file);
+    const { canvas } = this;
 
-    console.info(" drawImage url:", url, " url2:", url2);
     img.src = url;
     img.onload = () => {
-      const ctx = this.canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+      this.stickerImg = img;
+      this.currentX = canvas.width / 2;
+      this.currentY = canvas.height / 2;
+
+      this.dragImg();
+
+      this.draggerTimeID = setInterval(() => {
+        if(!this.draggable){
+          console.info(' 不需要拖动！！！！！！！！！！')
+          return 
+        }
+        this.dragImg();
+      }, 1000 / 30);
+
       setTimeout(() => {
         URL.revokeObjectURL(url);
-        img = null;
       });
     };
   };
@@ -175,12 +260,18 @@ class PcSign extends BaseSign {
     this.canvas.addEventListener("pointerdown", this.handleDown);
     this.canvas.addEventListener("pointerup", this.handleUp);
     this.canvas.addEventListener("pointermove", this.handleMove);
+
+    // 拖动逻辑
+    this.canvas.addEventListener("mousedown", this.mouseDown);
+    this.canvas.addEventListener("mousemove", this.mouseMove);
+    this.canvas.addEventListener("mouseup", this.mouseUp);
+    this.canvas.addEventListener("mouseout", this.mouseOut);
   }
 
   getCursorPosition(event) {
     const clientRect = this.canvas.getBoundingClientRect();
-    const positionX = event.clientX - clientRect.x;
-    const positionY = event.clientY - clientRect.y;
+    const positionX = parseInt(event.clientX - clientRect.x, 10);
+    const positionY = parseInt(event.clientY - clientRect.y, 10);
     return [positionX, positionY];
   }
 
