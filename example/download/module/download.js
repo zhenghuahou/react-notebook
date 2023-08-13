@@ -1,7 +1,7 @@
 import { getImageSize } from "./imgHandler.js";
 import { base64Data } from "./base64.js";
 // console.info('base64Data:',base64Data)
-export const downLoadImgByUrl = (url, width, height) => {
+export const downLoadImgByUrl = (url, {width, height,type}= {}) => {
   let canvas = document.createElement("canvas");
   let ctx = canvas.getContext("2d");
 
@@ -13,10 +13,10 @@ export const downLoadImgByUrl = (url, width, height) => {
     canvas.height = targetHeight;
     ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
     var saveA = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
-    const dataURL = canvas.toDataURL("image/jpeg", 0.9);
+    const dataURL = canvas.toDataURL(type, 0.9);
     // console.info("%c dataURL:", "color:red;", dataURL);
     saveA.href = dataURL;
-    saveA.download = "下载图片名称" + new Date().getTime();
+    saveA.download = "pic-" +new Date().toDateString();
     saveA.click();
     saveA = null;
   };
@@ -36,7 +36,7 @@ function getBlob(url, downloadName, width, height) {
       canvas.height = targetHeight;
       ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
       canvas.toBlob((b) => {
-        console.info(" blob:", b);
+        console.info('url:',url," canvas.toBlob --> b:", b);
         resolve(b);
       }, "image/jpeg");
     };
@@ -44,7 +44,6 @@ function getBlob(url, downloadName, width, height) {
     img.onerror = function (e) {
       reject(e);
     };
-    window.acx = canvas;
   });
 }
 
@@ -55,15 +54,13 @@ function download(blob, fileName) {
   link.href = url;
   link.click();
   URL.revokeObjectURL(url);
-  console.info(" url:", url);
+  console.info("[download] url:", url,' blob:',blob);
   link = null;
 }
 
 //  base64 或 url 下载图片，不通过img标签形式
 export const downloadByBlob = async (url, downloadName, width, height) => {
   const blob = await getBlob(url, downloadName, width, height);
-  window.blob2 = blob;
-  console.info("[downloadByBlob] blob:", blob);
   download(blob, "本地下载");
 };
 

@@ -35,5 +35,3 @@ canvas.toBlob(
   "image/vnd.microsoft.icon",
   "-moz-parse-options:format=bmp;bpp=32",
 );
-
-var abc=1;

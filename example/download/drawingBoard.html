@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="./public/favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>drawingBoard(画板)</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --primary-color: #000;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.4;
+        padding: 10px;
+        height: 2000px;
+        font-size: 14px;
+      }
+      .mt-10 {
+        margin-top: 10px;
+      }
+      .flex-center{
+        display: flex;
+        align-items: center;
+      }
+      .color-input {
+        margin-right: 5px;
+      }
+      .color-descri {
+        display: inline-block;
+        width: 14em;
+      }
+      .shadow-input{
+        margin-right: 5px;
+      }
+      .drawing-board-form {
+        margin: 0 auto;
+      }
+      .draw-area {
+        position: relative;
+      }
+      .canvas {
+        width: 500px;
+        height: 500px;
+        background-color: rgba(200, 150, 60, 0.5);
+      }
+      .drawing-board {
+        cursor: url(./public/dog.png) 100 26, pointer;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 10px 0;
+      }
+      .mod-button {
+        color: var(--primary-color);
+        margin-right: 10px;
+        color: hsl(206, 100%, 40%);
+      }
+      .submit-button {
+        width: 100%;
+        background-color: var(--primary-color);
+        border: none;
+        padding: 0.5rem 1rem;
+        color: #fff;
+        cursor: pointer;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h3><b>drawingBoard(画板)</b></h3>
+    <div class="draw-area">
+      <canvas class="drawing-board" id="myCanvas"></canvas>
+    </div>
+    <p class="flex-center">
+      <span class="color-descri">set canvas bg(设置画布背景)</span>
+      <input
+        class="color-input"
+        type="color"
+        id="canvasColor"
+        name="canvasColor"
+        value="#ffffff"
+      />
+      <label for="canvasColor">canvas bg</label>
+    </p>
+    <p class="flex-center">
+      <span class="color-descri">set text color (设置文本颜色)</span>
+      <input
+        class="color-input"
+        type="color"
+        id="textColor"
+        name="textColor"
+        value="#e75573"
+      />
+      <label for="textColor">Text color</label>
+    </p>
+    <p class="flex-center">
+      <span class="color-descri">set stroke color (设置线条颜色)</span>
+      <input
+        class="color-input"
+        type="color"
+        id="strokeColor"
+        name="strokeColor"
+        value="#F6B73C"
+      />
+      <label for="textColor">stroke color</label>
+    </p>
+
+    <div class="mt-10">
+      <input
+        type="range"
+        id="fontSize"
+        name="fontSize"
+        min="10"
+        max="30"
+        step="2"
+        value="16"
+      />
+      <label for="volume">font size(文字大小)</label>
+      <span class="fontsize-value"></span>
+    </div>
+
+    <div class="mt-10">
+      <input
+        type="range"
+        id="lineWidth"
+        name="lineWidth"
+        min="1"
+        max="20"
+        step="1"
+        value="5"
+      />
+      <label for="lineWidth">lineWidth(线条粗细)</label>
+      <span class="linewidth-value"></span>
+    </div>
+
+    <div class="mt-10 flex-center">
+      <input type="checkbox" id="shadow" name="shadow"  class="shadow-input"/>
+      <label for="shadow">shadow(开启投影)</label>
+    </div>
+
+    <p class="mt-10">
+      <input type="file" accept="image/*,.pdf" id="uploader" />
+      <a href="#" class="mod-button clear-button">Clear(清空)</a>
+      <!-- <a href="#" class="mod-button preview-btn">preview(预览)</a> -->
+      <a href="#" class="mod-button download-btn">download picture(下载图片)</a>
+    </p>
+    <div class="preview"></div>
+    <script type="module">
+      import { downLoadImgByUrl, downloadByBlob } from "./module/download.js";
+      import Sign from "./module/Drawer.js";
+      const canvas = document.querySelector("canvas");
+      const form = document.querySelector(".drawing-board-form");
+      const preview = document.querySelector(".preview");
+      const previewBtn = document.querySelector(".preview-btn");
+      const clearButton = document.querySelector(".clear-button");
+      const uploader = document.querySelector("#uploader");
+      const downloadBtn = document.querySelector(".download-btn");
+      const canvasColorInput = document.querySelector("#canvasColor");
+      const textColorInput = document.querySelector("#textColor");
+      const strokeColorInput = document.querySelector("#strokeColor");
+      const fontSizeInput = document.querySelector("#fontSize");
+      const fontsizeValueDom = document.querySelector(".fontsize-value");
+      const shadowCheckInput = document.querySelector("#shadow");
+      const lineWidthInput = document.querySelector("#lineWidth");
+      const linewidthValueDom = document.querySelector(".linewidth-value");
+
+      const drawer = new Sign({
+        canvas,
+        width: window.innerWidth - 20,
+        height: window.innerWidth - 20,
+        lineWidth: 5,
+        fillStyle: "#e75573", //文本样式
+        lineCap: "round",
+        lineJoin: "round",
+        strokeStyle: "#F6B73C",
+        font: "16px Proxima Nova",
+      });
+
+      clearButton?.addEventListener("click", (event) => {
+        event.preventDefault();
+        drawer.clear();
+      });
+
+      previewBtn?.addEventListener("click", (event) => {
+        event.preventDefault();
+        const imageURL = drawer.getDataURL();
+        const image = document.createElement("img");
+        image.src = imageURL;
+        image.height = canvas.height;
+        image.width = canvas.width;
+        image.style.display = "block";
+        preview.appendChild(image);
+        drawer.clear();
+      });
+
+      uploader?.addEventListener("change", (event) => {
+        const file = uploader.files[0];
+        drawer.drawImage(file);
+      });
+
+      downloadBtn.addEventListener("click", (event) => {
+        console.info(" downloadBtn event:", event);
+        const type = "image/png";
+        const url = drawer.getDataURL(type);
+        downLoadImgByUrl(url, { type });
+      });
+
+      const setCanvasColor = (event) => {
+        const color = event.target.value;
+        canvas.style.backgroundColor = color;
+      };
+
+      const setTextColor = (event) => {
+        const color = event.target.value;
+        drawer.updateAttrs({
+          fillStyle: color,
+        });
+      };
+
+      const setStrokeColor = (event) => {
+        const color = event.target.value;
+        drawer.updateAttrs({
+          strokeStyle: color,
+        });
+      };
+
+      canvasColorInput?.addEventListener("change", setCanvasColor, false);
+      textColorInput?.addEventListener("change", setTextColor, false);
+      strokeColorInput?.addEventListener("change", setStrokeColor, false);
+
+      fontSizeInput.addEventListener("input", (event) => {
+        const fontSize = event.target.value;
+        drawer.updateAttrs({
+          font: `${fontSize}px Proxima Nova`,
+        });
+        fontsizeValueDom.innerHTML = "字体大小: " + fontSize;
+      });
+
+      lineWidthInput.addEventListener("input", (event) => {
+        const lineWidth = event.target.value;
+        drawer.updateAttrs({
+          lineWidth,
+        });
+        linewidthValueDom.innerHTML = "线条宽度: " + lineWidth;
+      });
+
+      shadowCheckInput.addEventListener("change", () => {
+        if (shadowCheckInput.checked) {
+          drawer.updateAttrs({
+            shadowColor: "rgba(0, 0, 0, 0)",
+            shadowBlur: 2,
+            shadowOffsetX: 1,
+            shadowOffsetY: 1,
+            shadowColor: "rgba(90,90,90, 0.1)",
+          });
+        } else {
+          drawer.updateAttrs({
+            shadowColor: "rgba(0, 0, 0, 0)",
+            shadowBlur: 0,
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
