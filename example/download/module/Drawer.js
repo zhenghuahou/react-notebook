@@ -24,8 +24,6 @@ class BaseSign {
     canvas.height = height;
     const ctx = canvas.getContext("2d");
 
-    window.ctx = ctx;
-
     this.canvas = canvas;
     this.ctx = ctx;
     this.updateAttrs(attrs);
@@ -35,10 +33,8 @@ class BaseSign {
     this.signMode = false;
     this.input = null;
 
-    this.currentX = 0;
-    this.currentY = 0;
-
-    this.stickerImg = null;
+    this.currentDragIndex = -1; // 当前拖动物件的index
+    this.dragShapeList = []; //可以拖动的物体，现在暂时存放可以拖动的图片对象
   }
 
   updateAttrs(attrs = {}) {
@@ -101,9 +97,7 @@ class BaseSign {
   };
 
   handleDown = (event) => {
-    console.info(' @@@@@@@@@@@@@@@@@@',this.signMode
-    )
-    if(!this.signMode){
+    if (!this.signMode) {
       return;
     }
     event.preventDefault();
@@ -114,7 +108,7 @@ class BaseSign {
   };
 
   handleUp = (event) => {
-    if(!this.signMode){
+    if (!this.signMode) {
       return;
     }
     event.preventDefault();
@@ -122,7 +116,7 @@ class BaseSign {
   };
 
   handleMove = (event) => {
-    if(!this.signMode){
+    if (!this.signMode) {
       return;
     }
     event.preventDefault();
@@ -132,72 +126,87 @@ class BaseSign {
     this.ctx.stroke();
   };
 
-  mouseDown = (event) => {
-    const { stickerImg } = this;
-    const [positionX, positionY] = this.getCursorPosition(event);
-    if (!stickerImg) {
-      return console.info("没有图片");
-    }
+  isMouseInShape(x, y, shape) {
+    const { pointX, pointY, width, height } = shape;
+    const shapeLeft = pointX;
+    const shapeRight = pointX + width;
+    const shapeTop = pointY;
+    const shapeBottom = pointY + height;
+
     if (
-      positionX >= this.currentX - stickerImg.width / 2 &&
-      positionX <= this.currentX + stickerImg.width / 2 &&
-      positionY >= this.currentY - stickerImg.height / 2 &&
-      positionY <= this.currentY + stickerImg.height / 2
+      x >= shapeLeft &&
+      x <= shapeRight &&
+      y >= shapeTop &&
+      y <= shapeBottom
     ) {
-      this.draggable = true;
-    } else {
+      console.info(" 在图片里yes ");
+      return true;
+    }
+
+    console.info(" 不在图片里no ");
+    return false;
+  }
+
+  mouseDown = (event) => {
+    event.preventDefault;
+    console.info("===> event:", event);
+    const { dragShapeList } = this;
+    if (!dragShapeList?.length) {
+      return console.info("没有移动物体");
+    }
+    let index = 0;
+    const [positionX, positionY] = this.getCursorPosition(event);
+    this.startPointX = positionX; //拖动的X轴开始位置
+    this.startPointY = positionY;// 拖动的Y轴开始位置
+    for (let shape of dragShapeList) {
+      if (this.isMouseInShape(positionX, positionY, shape)) {
+        this.draggable = true;
+        this.currentDragIndex = index;
+        return;
+      }
+      index = index + 1;
       console.info("不在图片区域");
     }
   };
 
   mouseMove = (event) => {
     if (!this.draggable) return;
+    event.preventDefault();
     const [positionX, positionY] = this.getCursorPosition(event);
-    console.info(
-      " mousemove positionX, positionY:",
-      positionX,
-      positionY,
-      " this.draggable:",
-      this.draggable,
-      "(this.draggerTimeID:",
-      this.draggerTimeID
-    );
     if (this.draggable) {
-      this.currentX = positionX;
-      this.currentY = positionY;
+      const dx = positionX - this.startPointX;
+      const dy = positionY - this.startPointY;
+      // console.info(' positionX: positionY:',positionX, positionY,' this.startPointX:',this.startPointX,this.startPointY,'dx:',dx,dy);
+      const currentDragShape = this.dragShapeList[this.currentDragIndex];
+      currentDragShape.pointX += dx;
+      currentDragShape.pointY += dy;
+      this.drawDragShape();
+      this.startPointX = positionX;
+      this.startPointY = positionY;
     }
   };
   mouseUp = (event) => {
-    const [positionX, positionY] = this.getCursorPosition(event);
-    console.info(
-      "mouseUp=========> positionX, positionY",
-      positionX,
-      positionY,
-      "draggerTimeID:",
-      this.draggerTimeID
-    );
+    if (!this.draggable) {
+      return;
+    }
+    event.preventDefault();
     this.draggable = false;
-    // clearInterval(this.draggerTimeID);
   };
-  dragImg() {
+  // 绘制拖动的物件
+  drawDragShape = () => {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.drawImage(
-      this.stickerImg,
-      this.currentX - this.stickerImg.width / 2,
-      this.currentY - this.stickerImg.height / 2
-    );
-  }
+    const {dragShapeList} = this;
+    for (let shape of dragShapeList) {
+      const { pointX, pointY } = shape;
+      this.ctx.drawImage(shape, pointX, pointY);
+    }
+  };
   mouseOut = (event) => {
-    const [positionX, positionY] = this.getCursorPosition(event);
-    console.info(
-      "mouseOut =========>  positionX, positionY",
-      positionX,
-      positionY,
-      "draggerTimeID:",
-      this.draggerTimeID
-    );
+    if (!this.draggable) {
+      return;
+    }
+    event.preventDefault();
     this.draggable = false;
-    // clearInterval(this.draggerTimeID);
   };
 
   drawImage = (file) => {
@@ -207,19 +216,12 @@ class BaseSign {
 
     img.src = url;
     img.onload = () => {
-      this.stickerImg = img;
-      this.currentX = canvas.width / 2;
-      this.currentY = canvas.height / 2;
 
-      this.dragImg();
+      img.pointX = canvas.width / 2 - img.width / 2;
+      img.pointY = canvas.height / 2 - img.height / 2;
 
-      this.draggerTimeID = setInterval(() => {
-        if(!this.draggable){
-          console.info(' 不需要拖动！！！！！！！！！！')
-          return 
-        }
-        this.dragImg();
-      }, 1000 / 30);
+      this.dragShapeList.push(img);
+      this.drawDragShape();
 
       setTimeout(() => {
         URL.revokeObjectURL(url);
