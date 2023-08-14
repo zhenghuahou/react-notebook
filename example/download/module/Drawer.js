@@ -33,8 +33,11 @@ class BaseSign {
     this.signMode = false;
     this.input = null;
 
+    this.dragSnapStack = []; //拖动物件之前，保存当前canvas数据
     this.currentDragIndex = -1; // 当前拖动物件的index
     this.dragShapeList = []; //可以拖动的物体，现在暂时存放可以拖动的图片对象
+
+    window.zz = this;
   }
 
   updateAttrs(attrs = {}) {
@@ -157,7 +160,7 @@ class BaseSign {
     let index = 0;
     const [positionX, positionY] = this.getCursorPosition(event);
     this.startPointX = positionX; //拖动的X轴开始位置
-    this.startPointY = positionY;// 拖动的Y轴开始位置
+    this.startPointY = positionY; // 拖动的Y轴开始位置
     for (let shape of dragShapeList) {
       if (this.isMouseInShape(positionX, positionY, shape)) {
         this.draggable = true;
@@ -180,7 +183,9 @@ class BaseSign {
       const currentDragShape = this.dragShapeList[this.currentDragIndex];
       currentDragShape.pointX += dx;
       currentDragShape.pointY += dy;
+
       this.drawDragShape();
+
       this.startPointX = positionX;
       this.startPointY = positionY;
     }
@@ -192,10 +197,27 @@ class BaseSign {
     event.preventDefault();
     this.draggable = false;
   };
+
+  save() {
+    this.dragSnapStack.push(this.canvas.toDataURL());
+  }
+
+  restore() {
+    const img = new Image();
+    const src = this.dragSnapStack[this.dragSnapStack.length - 1];
+    img.src = src;
+    console.info(" src:", src);
+    img.onload = () => {
+      this.ctx.drawImage(img, 0, 0);
+    };
+  }
   // 绘制拖动的物件
   drawDragShape = () => {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    const {dragShapeList} = this;
+
+    this.restore();
+
+    const { dragShapeList } = this;
     for (let shape of dragShapeList) {
       const { pointX, pointY } = shape;
       this.ctx.drawImage(shape, pointX, pointY);
@@ -216,11 +238,12 @@ class BaseSign {
 
     img.src = url;
     img.onload = () => {
-
       img.pointX = canvas.width / 2 - img.width / 2;
       img.pointY = canvas.height / 2 - img.height / 2;
 
       this.dragShapeList.push(img);
+      // 保存出入图片之前的canvas数据
+      // this.save();
       this.drawDragShape();
 
       setTimeout(() => {
@@ -236,7 +259,6 @@ class BaseSign {
     link.href = url;
     link.click();
     URL.revokeObjectURL(url);
-    console.info(" url:", url);
     link = null;
   }
 
