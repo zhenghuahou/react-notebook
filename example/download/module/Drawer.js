@@ -38,8 +38,6 @@ class BaseSign {
     this.dragSnapStack = []; //拖动物件之前，保存当前canvas数据
     this.currentDragIndex = -1; // 当前拖动物件的index
     this.dragShapeList = []; //可以拖动的物体，现在暂时存放可以拖动的图片对象
-
-    window.zz = this;
   }
 
   initBackgroundCanvas(options) {
@@ -84,7 +82,7 @@ class BaseSign {
 
     const extraX = positionX;
     const extraY = positionY;
-    console.info("[renderInput] positionX, positionY:", positionX, positionY);
+
     input.style.left = extraX + "px";
     input.style.top = extraY + "px";
     input.style.opacity = 1;
@@ -116,7 +114,6 @@ class BaseSign {
   // Draw the text onto canvas
   drawText(text, x, y, enableBackground = false) {
     const ctx = enableBackground ? this.backgroundCanvasCtx : this.ctx;
-    console.info(" enableBackground:", enableBackground);
     if (enableBackground) {
       this.toggleBackgroundCanvas(true);
     }
@@ -167,17 +164,16 @@ class BaseSign {
       y >= shapeTop &&
       y <= shapeBottom
     ) {
-      console.info(" 在图片里yes ");
+      console.info("在图片里");
       return true;
     }
 
-    console.info(" 不在图片里no ");
+    console.info("不在图片区域");
     return false;
   }
 
   mouseDown = (event) => {
     event.preventDefault;
-    console.info("===> event:", event);
     const { dragShapeList } = this;
     if (!dragShapeList?.length) {
       return console.info("没有移动物体");
@@ -204,7 +200,6 @@ class BaseSign {
     if (this.draggable) {
       const dx = positionX - this.startPointX;
       const dy = positionY - this.startPointY;
-      // console.info(' positionX: positionY:',positionX, positionY,' this.startPointX:',this.startPointX,this.startPointY,'dx:',dx,dy);
       const currentDragShape = this.dragShapeList[this.currentDragIndex];
       currentDragShape.pointX += dx;
       currentDragShape.pointY += dy;
@@ -231,7 +226,6 @@ class BaseSign {
     const img = new Image();
     const src = this.dragSnapStack[this.dragSnapStack.length - 1];
     img.src = src;
-    console.info(" src:", src);
     img.onload = () => {
       this.ctx.drawImage(img, 0, 0);
     };
