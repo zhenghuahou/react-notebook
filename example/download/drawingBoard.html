@@ -24,7 +24,7 @@
       .mt-10 {
         margin-top: 10px;
       }
-      .flex-center{
+      .flex-center {
         display: flex;
         align-items: center;
       }
@@ -35,7 +35,7 @@
         display: inline-block;
         width: 14em;
       }
-      .shadow-input{
+      .shadow-input {
         margin-right: 5px;
       }
       .drawing-board-form {
@@ -44,15 +44,16 @@
       .draw-area {
         position: relative;
       }
-      .canvas {
-        width: 500px;
-        height: 500px;
-        background-color: rgba(200, 150, 60, 0.5);
+      .canvas-hide {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
       }
       .drawing-board {
-        /* cursor: url(./public/dog.png) 100 26, pointer; */
         border-radius: 4px;
-        background-color: #fff;
+        background-color: transparent;
         box-shadow: 0 2px 4px 6px rgba(0, 0, 0, 0.1);
         margin: 10px 0;
       }
@@ -140,12 +141,12 @@
     </div>
 
     <div class="mt-10 flex-center">
-      <input type="checkbox" id="shadow" name="shadow"  class="shadow-input"/>
+      <input type="checkbox" id="shadow" name="shadow" class="shadow-input" />
       <label for="shadow">shadow(开启投影)</label>
     </div>
 
     <div class="mt-10 flex-center">
-      <input type="checkbox" id="sign" name="sign"  class="mr-5"/>
+      <input type="checkbox" id="sign" name="sign" class="mr-5" />
       <label for="sign">sign(开启手写)</label>
     </div>
 
@@ -159,6 +160,7 @@
     <script type="module">
       import { downLoadImgByUrl, downloadByBlob } from "./module/download.js";
       import Sign from "./module/Drawer.js";
+      const canvasContainer = document.querySelector(".draw-area");
       const canvas = document.querySelector("canvas");
       const form = document.querySelector(".drawing-board-form");
       const preview = document.querySelector(".preview");
@@ -175,6 +177,10 @@
       const lineWidthInput = document.querySelector("#lineWidth");
       const linewidthValueDom = document.querySelector(".linewidth-value");
       const signInput = document.querySelector("#sign");
+
+      canvasContainer.addEventListener("dblclick", () => {
+        console.info(" this");
+      });
 
       const drawer = new Sign({
         canvas,
@@ -206,6 +212,9 @@
       });
 
       uploader?.addEventListener("change", (event) => {
+        // drawer.signMode = checked;
+        signInput.checked = false;
+        drawer.toggleBackgroundCanvas(false);
         const file = uploader.files[0];
         drawer.drawImage(file);
       });
@@ -219,7 +228,7 @@
 
       const setCanvasColor = (event) => {
         const color = event.target.value;
-        canvas.style.backgroundColor = color;
+        canvas.parentNode.style.backgroundColor = color;
       };
 
       const setTextColor = (event) => {
@@ -276,8 +285,10 @@
       });
 
       signInput.addEventListener("change", () => {
-        console.info(' signInput.checked:',signInput.checked)
-          drawer.signMode = signInput.checked? true:false;
+        console.info(" signInput.checked:", signInput.checked);
+        const checked = signInput.checked ? true : false;
+        drawer.toggleBackgroundCanvas(checked);
+        drawer.signMode = checked;
       });
     </script>
   </body>

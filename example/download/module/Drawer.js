@@ -26,6 +26,8 @@ class BaseSign {
 
     this.canvas = canvas;
     this.ctx = ctx;
+    this.initBackgroundCanvas(options);
+
     this.updateAttrs(attrs);
 
     this.writingMode = false;
@@ -40,10 +42,23 @@ class BaseSign {
     window.zz = this;
   }
 
+  initBackgroundCanvas(options) {
+    const { width = 500, height = 500 } = options || {};
+    let canvas = document.createElement("canvas");
+    canvas.classList.add("canvas-hide");
+    let ctx = canvas.getContext("2d");
+    canvas.width = width;
+    canvas.height = height;
+    canvas.style.zIndex = -1;
+    this.backgroundCanvas = canvas;
+    this.backgroundCanvasCtx = ctx;
+    this.canvas.parentNode.appendChild(canvas);
+  }
+
   updateAttrs(attrs = {}) {
-    const { ctx } = this;
+    const { ctx, backgroundCanvasCtx } = this;
     Object.keys(attrs).forEach((key) => {
-      ctx[key] = attrs[key];
+      ctx[key] = backgroundCanvasCtx[key] = attrs[key];
     });
   }
 
@@ -85,19 +100,29 @@ class BaseSign {
     input.focus();
   }
 
-  // Draw the text onto canvas
-  drawText(text, x, y) {
-    this.ctx.fillText(text, x, y + 10);
-  }
   // Key handler for input box
   handleEnter = (e) => {
     const { input } = this;
     const { keyCode } = e;
     if (keyCode === 13) {
-      this.drawText(input.value, input.extraX, input.extraY);
+      this.drawText(input.value, input.extraX, input.extraY, true);
       this.hideInput();
     }
   };
+
+  toggleBackgroundCanvas(isShow) {
+    this.backgroundCanvas.style.zIndex = isShow ? 2 : -1;
+  }
+  // Draw the text onto canvas
+  drawText(text, x, y, enableBackground = false) {
+    const ctx = enableBackground ? this.backgroundCanvasCtx : this.ctx;
+    console.info(" enableBackground:", enableBackground);
+    if (enableBackground) {
+      this.toggleBackgroundCanvas(true);
+    }
+    ctx.fillText(text, x, y + 10);
+    this.toggleBackgroundCanvas(false);
+  }
 
   handleDown = (event) => {
     if (!this.signMode) {
@@ -105,9 +130,9 @@ class BaseSign {
     }
     event.preventDefault();
     this.writingMode = true;
-    this.ctx.beginPath();
+    this.backgroundCanvasCtx.beginPath();
     const [positionX, positionY] = this.getCursorPosition(event);
-    this.ctx.moveTo(positionX, positionY);
+    this.backgroundCanvasCtx.moveTo(positionX, positionY);
   };
 
   handleUp = (event) => {
@@ -125,8 +150,8 @@ class BaseSign {
     event.preventDefault();
     if (!this.writingMode) return;
     const [positionX, positionY] = this.getCursorPosition(event);
-    this.ctx.lineTo(positionX, positionY);
-    this.ctx.stroke();
+    this.backgroundCanvasCtx.lineTo(positionX, positionY);
+    this.backgroundCanvasCtx.stroke();
   };
 
   isMouseInShape(x, y, shape) {
@@ -280,10 +305,11 @@ class PcSign extends BaseSign {
   }
 
   init() {
-    this.canvas.addEventListener("dblclick", this.dblclick);
-    this.canvas.addEventListener("pointerdown", this.handleDown);
-    this.canvas.addEventListener("pointerup", this.handleUp);
-    this.canvas.addEventListener("pointermove", this.handleMove);
+    // this.canvas.addEventListener("dblclick", this.dblclick);
+    this.canvas.parentNode.addEventListener("dblclick", this.dblclick);
+    this.backgroundCanvas.addEventListener("pointerdown", this.handleDown);
+    this.backgroundCanvas.addEventListener("pointerup", this.handleUp);
+    this.backgroundCanvas.addEventListener("pointermove", this.handleMove);
 
     // 拖动逻辑
     this.canvas.addEventListener("mousedown", this.mouseDown);
@@ -293,7 +319,7 @@ class PcSign extends BaseSign {
   }
 
   getCursorPosition(event) {
-    const clientRect = this.canvas.getBoundingClientRect();
+    const clientRect = this.backgroundCanvas.getBoundingClientRect();
     const positionX = parseInt(event.clientX - clientRect.x, 10);
     const positionY = parseInt(event.clientY - clientRect.y, 10);
     return [positionX, positionY];
@@ -313,15 +339,15 @@ class MobileSign extends BaseSign {
   }
 
   init() {
-    this.canvas.addEventListener("touchstart", this.doubleTouch);
-    this.canvas.addEventListener("touchstart", this.handleDown);
-    this.canvas.addEventListener("touchend", this.handleUp);
-    this.canvas.addEventListener("touchmove", this.handleMove);
+    this.backgroundCanvas.addEventListener("touchstart", this.doubleTouch);
+    this.backgroundCanvas.addEventListener("touchstart", this.handleDown);
+    this.backgroundCanvas.addEventListener("touchend", this.handleUp);
+    this.backgroundCanvas.addEventListener("touchmove", this.handleMove);
   }
 
   getCursorPosition(event) {
     //获取canvas相对可视区域的偏移量
-    const clientRect = this.canvas.getBoundingClientRect();
+    const clientRect = this.backgroundCanvas.getBoundingClientRect();
     const point = event.targetTouches[0];
     const positionX = point.clientX - clientRect.x;
     const positionY = point.clientY - clientRect.y;
