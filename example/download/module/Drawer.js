@@ -178,17 +178,18 @@ class BaseSign {
     if (!dragShapeList?.length) {
       return console.info("没有移动物体");
     }
-    let index = 0;
+
     const [positionX, positionY] = this.getCursorPosition(event);
     this.startPointX = positionX; //拖动的X轴开始位置
     this.startPointY = positionY; // 拖动的Y轴开始位置
-    for (let shape of dragShapeList) {
+
+    for (let i = dragShapeList.length - 1; i >= 0; i--) {
+      const shape = dragShapeList[i];
       if (this.isMouseInShape(positionX, positionY, shape)) {
         this.draggable = true;
-        this.currentDragIndex = index;
+        this.currentDragIndex = i;
         return;
       }
-      index = index + 1;
       console.info("不在图片区域");
     }
   };
@@ -218,23 +219,23 @@ class BaseSign {
     this.draggable = false;
   };
 
-  save() {
-    this.dragSnapStack.push(this.canvas.toDataURL());
-  }
+  // save() {
+  //   this.dragSnapStack.push(this.canvas.toDataURL());
+  // }
 
-  restore() {
-    const img = new Image();
-    const src = this.dragSnapStack[this.dragSnapStack.length - 1];
-    img.src = src;
-    img.onload = () => {
-      this.ctx.drawImage(img, 0, 0);
-    };
-  }
+  // restore() {
+  //   const img = new Image();
+  //   const src = this.dragSnapStack[this.dragSnapStack.length - 1];
+  //   img.src = src;
+  //   img.onload = () => {
+  //     this.ctx.drawImage(img, 0, 0);
+  //   };
+  // }
   // 绘制拖动的物件
   drawDragShape = () => {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-    this.restore();
+    // this.restore();
 
     const { dragShapeList } = this;
     for (let shape of dragShapeList) {
@@ -252,7 +253,7 @@ class BaseSign {
 
   drawImage = (file) => {
     let img = new Image();
-    const url = URL.createObjectURL(file);
+    const url = typeof file === "string" ? file : URL.createObjectURL(file);
     const { canvas } = this;
 
     img.src = url;
@@ -261,7 +262,7 @@ class BaseSign {
       img.pointY = canvas.height / 2 - img.height / 2;
 
       this.dragShapeList.push(img);
-      // 保存出入图片之前的canvas数据
+      // 保存导入图片之前的canvas数据
       // this.save();
       this.drawDragShape();
 
@@ -286,8 +287,37 @@ class BaseSign {
     this.setCanvasBg();
   }
 
+  genDataURL(type = "image/png") {
+    const g1 = this.canvas.toDataURL(type);
+    const g2 = this.backgroundCanvas.toDataURL(type);
+
+    let canvas = document.createElement("canvas");
+    canvas.width = this.canvas.width;
+    canvas.height = this.canvas.height;
+    let ctx = canvas.getContext("2d");
+
+    const dataList = this.signMode ? [g1, g2] : [g2, g1];
+    for (let d of dataList) {
+      let img = new Image();
+      img.crossOrigin = "Anonymous";
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+        img = null;
+      };
+      img.src = d;
+    }
+   
+    return new Promise((resolve)=>{
+      setTimeout(() => {
+        resolve(canvas.toDataURL(type));
+        canvas = null;
+        ctx = null;
+      },1000);
+    })
+  }
+
   getDataURL(type = "image/png") {
-    return this.canvas.toDataURL(type);
+    return this.genDataURL(type);
   }
 }
 
