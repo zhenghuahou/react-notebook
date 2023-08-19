@@ -72,6 +72,9 @@
         margin-top: 2rem;
       }
     </style>
+    <script src="
+    https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js
+    "></script>
   </head>
   <body>
     <h3><b>drawingBoard(画板)</b></h3>
@@ -150,17 +153,17 @@
     <p class="mt-10">
       <input type="file" accept="image/*,.pdf" id="uploader" />
     </p>
-    <div class="img-area"  id="imgSelect">
-      <img src="./public/assets/img1.jpeg" alt="" width="50">
-      <img src="./public/assets/img2.webp" alt="" width="50">
-      <img src="./public/assets/img3.webp" alt="" width="50">
-      <img src="./public/assets/img4.webp" alt="" width="50">
-      <img src="./public/assets/img5.jpeg" alt="" width="50">
-      <img src="./public/assets/img6.png" alt="" width="50">
-      <img src="./public/assets/img7.png" alt="" width="50">
-      <img src="./public/assets/img8.png" alt="" width="50">
-      <img src="./public/assets/img9.png" alt="" width="50">
-      <img src="./public/assets/img10.png" alt="" width="50">
+    <div class="img-area" id="imgSelect">
+      <img src="./public/assets/img1.jpeg" alt="" width="50" />
+      <img src="./public/assets/img2.webp" alt="" width="50" />
+      <img src="./public/assets/img3.webp" alt="" width="50" />
+      <img src="./public/assets/img4.webp" alt="" width="50" />
+      <img src="./public/assets/img5.jpeg" alt="" width="50" />
+      <img src="./public/assets/img6.png" alt="" width="50" />
+      <img src="./public/assets/img7.png" alt="" width="50" />
+      <img src="./public/assets/img8.png" alt="" width="50" />
+      <img src="./public/assets/img9.png" alt="" width="50" />
+      <img src="./public/assets/img10.png" alt="" width="50" />
     </div>
     <p class="mt-10">
       <a href="#" class="mod-button clear-button">Clear(清空)</a>
@@ -206,18 +209,17 @@
         font: "16px Proxima Nova",
       });
 
+  
+
       imgSelect.addEventListener("click", (v) => {
         const url = v.target.src;
-        console.info(" change v:", v,v.target.src,' url:',url);
-        drawer.drawImage(url)
-
+        console.info(" change v:", v, v.target.src, " url:", url);
+        drawer.drawImage(url);
       });
 
       canvasContainer.addEventListener("dblclick", () => {
         console.info(" this");
       });
-
-
 
       clearButton?.addEventListener("click", (event) => {
         event.preventDefault();

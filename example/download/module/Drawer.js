@@ -19,6 +19,7 @@ class BaseSign {
   }
 
   initCanvas(canvas, options) {
+    window.dd = this;
     const { width = 500, height = 500, ...attrs } = options || {};
     canvas.width = width;
     canvas.height = height;
@@ -38,9 +39,31 @@ class BaseSign {
     this.dragSnapStack = []; //拖动物件之前，保存当前canvas数据
     this.currentDragIndex = -1; // 当前拖动物件的index
     this.dragShapeList = []; //可以拖动的物体，现在暂时存放可以拖动的图片对象
+    this.resize();
+  }
+
+  doResize(){
+    this.save();
+      const width = window.innerWidth - 20;
+      const height = window.innerHeight - 20;
+      this.canvas.width = width;
+      this.canvas.height = height;
+      this.backgroundCanvas.width = width;
+      this.backgroundCanvas.height = height;
+      this.restore();
+  }
+
+  resize() {
+    window.addEventListener('resize', window._.debounce(() => {
+      this.doResize();
+    }, 100));
+
   }
 
   initBackgroundCanvas(options) {
+    if (this.backgroundCanvas) {
+      return;
+    }
     const { width = 500, height = 500 } = options || {};
     let canvas = document.createElement("canvas");
     canvas.classList.add("canvas-hide");
@@ -117,8 +140,8 @@ class BaseSign {
     if (enableBackground) {
       this.toggleBackgroundCanvas(true);
     }
-    ctx.fillText(text, x, y + 10);
-    this.toggleBackgroundCanvas(false);
+    ctx.fillText(text, x, y - 5);
+    // this.toggleBackgroundCanvas(false);
   }
 
   handleDown = (event) => {
@@ -219,23 +242,10 @@ class BaseSign {
     this.draggable = false;
   };
 
-  // save() {
-  //   this.dragSnapStack.push(this.canvas.toDataURL());
-  // }
 
-  // restore() {
-  //   const img = new Image();
-  //   const src = this.dragSnapStack[this.dragSnapStack.length - 1];
-  //   img.src = src;
-  //   img.onload = () => {
-  //     this.ctx.drawImage(img, 0, 0);
-  //   };
-  // }
   // 绘制拖动的物件
   drawDragShape = () => {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    // this.restore();
 
     const { dragShapeList } = this;
     for (let shape of dragShapeList) {
@@ -262,8 +272,6 @@ class BaseSign {
       img.pointY = canvas.height / 2 - img.height / 2;
 
       this.dragShapeList.push(img);
-      // 保存导入图片之前的canvas数据
-      // this.save();
       this.drawDragShape();
 
       setTimeout(() => {
@@ -287,33 +295,62 @@ class BaseSign {
     this.setCanvasBg();
   }
 
+  drawImageByCtx({ ctx, url }) {
+    let img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0);
+      img = null;
+    };
+    img.src = url;
+  }
+  
+  save(){
+    const d1 = this.canvas.toDataURL();
+    const d2 = this.backgroundCanvas.toDataURL();
+    this.dragSnapStack.push({d1,d2});
+  }
+
+restore() {
+    const data = this.dragSnapStack.pop();
+    if(data){
+      const {d1,d2} = data
+      let g1Ctx = this.canvas.getContext("2d");
+      let g2Ctx = this.backgroundCanvas.getContext("2d");
+      this.drawImageByCtx({ ctx: g1Ctx, url: d1 });
+      this.drawImageByCtx({ ctx: g2Ctx, url: d2 });
+    }
+  }
+
+  drawImages(type = "image/png") {
+    const url1 = this.canvas.toDataURL(type);
+    const url2 = this.backgroundCanvas.toDataURL(type);
+    let g1Ctx = this.canvas.getContext("2d");
+    let g2Ctx = this.backgroundCanvas.getContext("2d");
+    this.drawImageByCtx({ ctx: g1Ctx, url: url1 });
+    this.drawImageByCtx({ ctx: g2Ctx, url: url2 });
+  }
+
   genDataURL(type = "image/png") {
     const g1 = this.canvas.toDataURL(type);
     const g2 = this.backgroundCanvas.toDataURL(type);
-
     let canvas = document.createElement("canvas");
+    let ctx = canvas.getContext("2d");
     canvas.width = this.canvas.width;
     canvas.height = this.canvas.height;
-    let ctx = canvas.getContext("2d");
 
     const dataList = this.signMode ? [g1, g2] : [g2, g1];
     for (let d of dataList) {
-      let img = new Image();
-      img.crossOrigin = "Anonymous";
-      img.onload = () => {
-        ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
-        img = null;
-      };
-      img.src = d;
+      this.drawImageByCtx({ ctx, url: d });
     }
-   
-    return new Promise((resolve)=>{
+
+    return new Promise((resolve) => {
       setTimeout(() => {
         resolve(canvas.toDataURL(type));
         canvas = null;
         ctx = null;
-      },1000);
-    })
+      }, 1000);
+    });
   }
 
   getDataURL(type = "image/png") {
