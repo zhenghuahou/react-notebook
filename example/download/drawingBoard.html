@@ -146,7 +146,7 @@
     </div>
 
     <div class="mt-10 flex-center">
-      <input type="checkbox" id="sign" name="sign" class="mr-5" />
+      <input type="checkbox" id="sign" name="sign" class="mr-5"  />
       <label for="sign">sign(开启手写)</label>
     </div>
 
@@ -167,7 +167,6 @@
     </div>
     <p class="mt-10">
       <a href="#" class="mod-button clear-button">Clear(清空)</a>
-      <!-- <a href="#" class="mod-button preview-btn">preview(预览)</a> -->
       <a href="#" class="mod-button download-btn">download picture(下载图片)</a>
     </p>
     <div class="draw-area">
@@ -209,11 +208,18 @@
         font: "16px Proxima Nova",
       });
 
-  
+      function setSignMode(value){
+        signInput.checked = value; 
+        drawer.signMode = value;
+      }
 
       imgSelect.addEventListener("click", (v) => {
         const url = v.target.src;
         console.info(" change v:", v, v.target.src, " url:", url);
+        // signInput.checked = false; // 取消手写模式选中状态
+        // drawer.signMode = false;// 关闭手写模式字段
+        setSignMode(false)
+        drawer.toggleBackgroundCanvas(false);
         drawer.drawImage(url);
       });
 
@@ -308,6 +314,9 @@
           });
         }
       });
+
+      setSignMode(true);
+      drawer.toggleBackgroundCanvas(true);
 
       signInput.addEventListener("change", () => {
         console.info(" signInput.checked:", signInput.checked);

@@ -14,7 +14,6 @@ export const downLoadImgByUrl = (url, {width, height,type}= {}) => {
     ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
     var saveA = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
     const dataURL = canvas.toDataURL(type, 0.9);
-    // console.info("%c dataURL:", "color:red;", dataURL);
     saveA.href = dataURL;
     saveA.download = "pic-" +new Date().toDateString();
     saveA.click();

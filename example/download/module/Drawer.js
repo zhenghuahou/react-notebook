@@ -28,6 +28,7 @@ class BaseSign {
     this.canvas = canvas;
     this.ctx = ctx;
     this.initBackgroundCanvas(options);
+    this.state = {};
 
     this.updateAttrs(attrs);
 
@@ -42,22 +43,25 @@ class BaseSign {
     this.resize();
   }
 
-  doResize(){
+  doResize() {
     this.save();
-      const width = window.innerWidth - 20;
-      const height = window.innerHeight - 20;
-      this.canvas.width = width;
-      this.canvas.height = height;
-      this.backgroundCanvas.width = width;
-      this.backgroundCanvas.height = height;
-      this.restore();
+    const width = window.innerWidth - 20;
+    const height = window.innerHeight - 20;
+    this.canvas.width = width;
+    this.canvas.height = height;
+    this.backgroundCanvas.width = width;
+    this.backgroundCanvas.height = height;
+    this.restoreAttrs();
+    this.restore();
   }
 
   resize() {
-    window.addEventListener('resize', window._.debounce(() => {
-      this.doResize();
-    }, 100));
-
+    window.addEventListener(
+      "resize",
+      window._.debounce(() => {
+        this.doResize();
+      }, 100)
+    );
   }
 
   initBackgroundCanvas(options) {
@@ -76,9 +80,15 @@ class BaseSign {
     this.canvas.parentNode.appendChild(canvas);
   }
 
+  restoreAttrs(){
+    const state = this.state;
+    this.updateAttrs(state);
+  }
+
   updateAttrs(attrs = {}) {
     const { ctx, backgroundCanvasCtx } = this;
     Object.keys(attrs).forEach((key) => {
+      this.state[key]=  attrs[key];
       ctx[key] = backgroundCanvasCtx[key] = attrs[key];
     });
   }
@@ -242,7 +252,6 @@ class BaseSign {
     this.draggable = false;
   };
 
-
   // 绘制拖动的物件
   drawDragShape = () => {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -304,17 +313,17 @@ class BaseSign {
     };
     img.src = url;
   }
-  
-  save(){
+
+  save() {
     const d1 = this.canvas.toDataURL();
     const d2 = this.backgroundCanvas.toDataURL();
-    this.dragSnapStack.push({d1,d2});
+    this.dragSnapStack.push({ d1, d2 });
   }
 
-restore() {
+  restore() {
     const data = this.dragSnapStack.pop();
-    if(data){
-      const {d1,d2} = data
+    if (data) {
+      const { d1, d2 } = data;
       let g1Ctx = this.canvas.getContext("2d");
       let g2Ctx = this.backgroundCanvas.getContext("2d");
       this.drawImageByCtx({ ctx: g1Ctx, url: d1 });
