@@ -301,7 +301,7 @@ class BaseSign {
 
   clear() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.setCanvasBg();
+    this.backgroundCanvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   drawImageByCtx({ ctx, url }) {
