@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom to image</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        .demo{
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            border:2px solid #999;
+            margin: 20px;
+        }
+        .demo .hd{
+            color:#333;
+            font-size:18px;
+            padding: 10px;
+        }
+        .demo .img{
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            display: block;
+        }
+        .demo .text{
+            color:pink;
+            background-color: #666;
+            border:1px solid #333;
+            font-size:16px;
+            display: inline-block;
+            margin: 10px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <section class="demo">
+        <h3 class="hd" id="hd">测试</h3>
+        <img src="./assets/test.jpeg" class="img">
+        <span class="text">title</span>
+    </section>
+    <script>
+        const titleDom = document.getElementById('hd')
+        const style =  window.getComputedStyle(titleDom)
+        console.info(' style:',style)
+    </script>
+</body>
+</html>

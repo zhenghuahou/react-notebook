@@ -1,4 +1,5 @@
 import SetState18 from './setState-18'
+import UseCountDown from './useCountDown'
 import UseLayoutEffect from './useLayoutEffect'
 import SetState from './setState'
 import BeforeYouMemo from './beforeYouMemo'
@@ -8,6 +9,11 @@ import Event from './event'
 
 const genConfig = function () {
   const config = [
+    {
+      path: "useCountDown",
+      title:'useCountDown',
+      element: <UseCountDown />,
+    },
    {
       path: "useLayoutEffect",
       title:'useLayoutEffect',

@@ -205,6 +205,9 @@ window.addEventListener("load", function () {
     this.innerHTML = count++;
   }
 
+  if(!container1){
+    return 
+  }
   container1.onmousemove = getUserAction;
 
   container2.onmousemove = debounceA(getUserAction, 1000);

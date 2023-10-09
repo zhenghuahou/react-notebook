@@ -1,6 +1,19 @@
 import Highlight from '../../components/highlight';
 export default function AddBigNumber() {
 
+
+    // sessionStorage.setItem('aaa',111);
+
+    setTimeout(()=>{
+        console.info('aaa: ',sessionStorage.getItem('aaa'));
+        console.info('bbb: ',sessionStorage.getItem('bbb'));
+    },1000);
+
+    setTimeout(()=>{
+    //     location.href='https://www.baidu.com'
+    window.open('https://www.jd.com')
+    },5000)
+
     const code = `
         // 测试一:
         function foo(){// 函数提升
