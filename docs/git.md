@@ -14,7 +14,6 @@ $ git pull <远程主机名> <远程分支名>:<本地分支名>
 ```
 
 比如，要取回origin主机的next分支，与本地的master分支合并，需要写成下面这样 -
-
 ```bash
 $ git pull origin next:master
 ```
@@ -46,14 +45,24 @@ git checkout -b local  origin/dev
 git branch -vv
 ```
 
+##### 关联远端分支
+- . 没有对应的远端分支的时候
+`将本地分支与远端add_order分支关联(会创建远端分支add_order)`
+```bash
+# 将本地分支与远程分支关联 ，远程也会新建一个分支 feature/add_order
+git push --set-upstream origin feature/add_order 
+```
+- 已经存在了关联的远端分支，更改本地分支对应的远端分支
+```bash
+# 把本地分支关联的远端分支更改为`feature/add_order2`远端分支
+git branch -u origin/feature/add_order2
+```
+
+
 `切换到上一个操作过的分支`
 ```bash
 git checkout -
 ```
-
-
-
-
 
 tips:如果新建的分支和远端的分支名字不一样，第一个push的时候，会有下面提示，按照提示
 运行`git push origin HEAD:dev`即可。
@@ -71,3 +80,7 @@ To push to the branch of the same name on the remote, use
     git push origin HEAD
 ```
 `
+
+
+git stash save 'message...'可以添加一些注释
+
