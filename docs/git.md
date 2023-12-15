@@ -96,3 +96,12 @@ To push to the branch of the same name on the remote, use
 ```bash
 git stash save 'message...'可以添加一些注释
 ```
+
+#####  删除分支
+```bash
+// 删除本地分支
+git branch -d localBranchName
+
+// 删除远程分支
+git push origin --delete remoteBranchName
+```
