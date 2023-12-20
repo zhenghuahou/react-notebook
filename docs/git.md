@@ -78,9 +78,9 @@ git checkout -
 `git push`使用细节
 tips:如果新建的分支和远端的分支名字不一样，第一次 push 的时候，会有下面提示，按照提示
 运行`git push origin HEAD:dev`即可。
-fatal: The upstream branch of your current branch does not match
+`fatal: The upstream branch of your current branch does not match
 the name of your current branch. To push to the upstream branch
-on the remote, use
+on the remote, use`
 
 ```bash
     git push origin HEAD:dev
@@ -99,9 +99,18 @@ git stash save 'message...'可以添加一些注释
 
 #####  删除分支
 ```bash
-// 删除本地分支
+# 删除本地分支
 git branch -d localBranchName
 
-// 删除远程分支
+# 删除远程分支
 git push origin --delete remoteBranchName
+```
+
+#### 查看提交记录
+```bash
+# git查看其他远程分支提交记录
+ git log origin/feature/detail
+
+# git 查看某一条提交记录的日志消息和文本diff
+git show 807eb3e9f7296b6f7612e84fc991d47feee57140
 ```
