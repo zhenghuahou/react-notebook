@@ -9,7 +9,8 @@
 git pull origin master 命令将从远程 master 分支获取更改并将它们合并到您当前签出的分支
 
 ```bash
-//更多请阅读：https://www.yiibai.com/git/git_pull.html
+//更多请阅读：https:
+//www.yiibai.com/git/git_pull.html
 $ git pull <远程主机名> <远程分支名>:<本地分支名>
 
 ```
@@ -83,13 +84,13 @@ the name of your current branch. To push to the upstream branch
 on the remote, use`
 
 ```bash
-    git push origin HEAD:dev
+git push origin HEAD:dev
 ```
 
 To push to the branch of the same name on the remote, use
 
 ```bash
-    git push origin HEAD
+git push origin HEAD
 ```
 
 `git stash`
@@ -104,13 +105,23 @@ git branch -d localBranchName
 
 # 删除远程分支
 git push origin --delete remoteBranchName
+
+# 删除远端`huazi/preApproval`分支,效果同上面
+git push orgin :huazi/preApproval
 ```
 
-#### 查看提交记录
+##### 创建远端分支
+```bash
+### 创建远端`feature/huazi/home`分支
+git push test:feature/huazi/home
+```
+
+##### 查看提交记录
 ```bash
 # git查看其他远程分支提交记录
- git log origin/feature/detail
+git log origin/feature/detail
 
 # git 查看某一条提交记录的日志消息和文本diff
 git show 807eb3e9f7296b6f7612e84fc991d47feee57140
 ```
+
