@@ -107,13 +107,14 @@ git branch -d localBranchName
 git push origin --delete remoteBranchName
 
 # 删除远端`huazi/preApproval`分支,效果同上面
-git push orgin :huazi/preApproval
+git push origin :huazi/preApproval
 ```
 
 ##### 创建远端分支
 ```bash
 ### 创建远端`feature/huazi/home`分支
-git push test:feature/huazi/home
+git push origin dev:feature/huazi/home
+
 ```
 
 ##### 查看提交记录
