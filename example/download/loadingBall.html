@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>loading ball</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+    
+      .loading-box {
+        width: 82px;
+        height: 200px;
+        margin: 20px;
+        display: flex;
+        background-color: rgba(0, 0, 0, 0.15);
+        .gap {
+          margin-bottom: 8px;
+        }
+      }
+      .ball-field {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ball-a,
+      .ball-b,
+      .ball-c {
+        display: block;
+        width: 16px;
+        background-color: white;
+        display: inline-block;
+      }
+      .ball-a {
+        height: 16px;
+        background-color: #2eaaa7;
+        display: block;
+        border-radius: 100%;
+      }
+      .ball-b {
+        height: 40px;
+        border-radius: 10px;
+      }
+      .ball-c {
+        height: 70px;
+        border-radius: 10px;
+        transform-origin: top left;
+      }
+
+      .glitter-up {
+        animation: glitter-up 0.8s ease-in infinite alternate;
+      }
+      .glitter-down {
+        animation: glitter-down 0.8s ease-in infinite alternate;
+      }
+      .shrink {
+        animation: shrink 0.8s ease-in infinite alternate;
+      }
+
+      @keyframes shrink {
+        40% {
+          opacity: 1;
+          transform: scaleY(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scaleY(0);
+        }
+      }
+
+      @keyframes glitter-up {
+        40% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-120%);
+        }
+      }
+
+      @keyframes glitter-down {
+        40% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(120%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading-box">
+      <span class="ball-field">
+        <i class="ball-a gap glitter-up"></i>
+        <i class="ball-b glitter-down"></i>
+      </span>
+      <span class="ball-field">
+        <i class="ball-c shrink"></i>
+      </span>
+      <span class="ball-field">
+        <i class="ball-b gap glitter-up"></i>
+        <i class="ball-a glitter-down"></i>
+      </span>
+    </div>
+  </body>
+</html>
