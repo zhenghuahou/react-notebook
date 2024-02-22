@@ -43,8 +43,13 @@ git reset --hard HEAD^
 `检出分支`
 
 ```bash
-# 从远端origin/dev 检出本地分支local，并自动跟踪远端origin/dev分支
+# 方法一: 从远端origin/dev 检出本地分支local，并自动跟踪远端origin/dev分支
 git checkout -b local  origin/dev
+
+# 方法二: 从远端`feature/leap`分支检出本地`local`分支，但是不自动跟踪远端`feature/leap`分支
+# Ps：使用该方式会在本地新建分支x，但是不会自动切换到该本地分支x，需要手动checkout；采用此种方法建立的本地分支不会和远程分支建立映射关系
+git fetch origin feature/leap:local
+
 ```
 
 `查看本地分支与远程分支关联关系`
@@ -70,11 +75,21 @@ git push --set-upstream origin feature/add_order
 git branch -u origin/feature/add_order2
 ```
 
-`切换到上一个操作过的分支`
+##### 撤销本地分支与远程分支的映射关系
 
 ```bash
+# 撤销本地分支与远程分支的映射关系
+git branch --unset-upstream
+```
+
+##### 切换到上一个操作过的分支
+
+```bash
+# 切换到上一个操作过的分支
 git checkout -
 ```
+
+##### `git push`使用细节
 
 `git push`使用细节
 tips:如果新建的分支和远端的分支名字不一样，第一次 push 的时候，会有下面提示，按照提示
@@ -94,11 +109,13 @@ git push origin HEAD
 ```
 
 `git stash`
+
 ```bash
 git stash save 'message...'可以添加一些注释
 ```
 
-#####  删除分支
+##### 删除分支
+
 ```bash
 # 删除本地分支
 git branch -d localBranchName
@@ -111,6 +128,7 @@ git push origin :huazi/preApproval
 ```
 
 ##### 创建远端分支
+
 ```bash
 ### 创建远端`feature/huazi/home`分支
 git push origin dev:feature/huazi/home
@@ -118,6 +136,7 @@ git push origin dev:feature/huazi/home
 ```
 
 ##### 查看提交记录
+
 ```bash
 # git查看其他远程分支提交记录
 git log origin/feature/detail
@@ -125,4 +144,3 @@ git log origin/feature/detail
 # git 查看某一条提交记录的日志消息和文本diff
 git show 807eb3e9f7296b6f7612e84fc991d47feee57140
 ```
-
