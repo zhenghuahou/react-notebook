@@ -1,3 +1,9 @@
+### 切换 git 源
+
+```bash
+git remote set-url origin [remote_address]
+```
+
 ### git pull
 
 远程跟踪分支是您的本地分支从中提取更改并将更改推送到的分支。 如果您的分支没有远程跟踪分支，该命令将失败。
