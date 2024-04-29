@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="app">
+      <input id="testA" placeholder="input" />
+      <input id="testB" placeholder="change" />
+      <div id="mt-ua-checker"></div>
+      <div id="mt-ua-checker"></div>
+    </div>
+    <script type="module">
+      // (function () {
+      var aabbcc = 1;
+      // });
+      Promise.reject(11)
+        .then(
+          (e) => {
+            console.info("then first:");
+          },
+          () => {
+            console.info("then second:");
+          }
+        )
+        .catch((e) => {
+          console.info("then catch:");
+        });
+      Promise.reject(12).catch((e) => {
+        console.info("e:", e);
+      });
+    </script>
+    <script>
+      var i = 0;
+      var j = 0;
+      var k;
+      for (; i < 10, j < 6; i++, j++) {
+        k = i + j;
+      }
+      console.info("k:", k);
+    </script>
+    <script>
+      var aa = ["aa", "bb", "cc"];
+      for (let af in aa) {
+        console.info("in af:", af); //0 1 2
+      }
+
+      for (let ff of aa) {
+        console.info("of ff:", ff); // aa bb cc
+      }
+
+      document.getElementById("testA").addEventListener("input", function () {
+        console.info(" testA input this.value:", this.value);
+      });
+
+      document.getElementById("testB").addEventListener("change", function () {
+        console.info(" testB change this.value:", this.value);
+      });
+    </script>
+    <script>
+      var d = document.getElementById("mt-ua-checker");
+      var e = Promise.reject(111);
+      var rr = fetch(
+        "https://www.runoob.com/wp-content/themes/runoob/assets/js/main.min.js?v=1.166"
+      );
+      var a = 2;
+      console.info(" d:", d);
+      console.info("a:", a);
+    </script>
+    <script src="https://unpkg.com/vconsole@3.15.1/dist/vconsole.min.js"></script>
+    <script>
+      function test() {
+        for (let i = 0; i < 5; i++) {
+          console.info("i:===>", i);
+          for (let j = 5; j > 0; j--) {
+            // console.info("j:===>", j);
+            if (j < 3) {
+              break;
+            }
+            console.info("j:<===", j);
+          }
+          continue;
+          alert(11);
+          console.info("i:<===", i);
+        }
+        console.log(" end:");
+      }
+      test();
+    </script>
+    <script type="text/javascript">
+      console.log("代码开始执行了001");
+    </script>
+
+    <script type="text/javascript">
+      var abd = 12;
+      console.log("代码来到了报错module中002");
+      throw new Error();
+      console.log("模块代码报错，我无法执行了");
+    </script>
+
+    <script type="text/javascript">
+      console.log("外部模块代码报错，我仍然可以执行了003");
+    </script>
+  </body>
+</html>
