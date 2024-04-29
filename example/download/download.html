@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>下载图片/文本到本地</title>
+  </head>
+  <body>
+    <div class="class">
+      <input type="digit" />
+      <h4>下载图片的几种方法:</h4>
+      <section>
+        <p>方法一:saveAs方法(canvas.toDataURL): 下载的图片体积跟原图保持一致</p>
+        <button id="button">下载图片(saveAs)</button>
+      </section>
+      <hr />
+      <section>
+        <p>
+          方法二:downLoadImgByUrl方法(canvas.toDataURL),可以对下载的图片进行压缩,如果不压缩，下载下来的图片有可能要比原图体积大(具体与图片类型也有关)
+        </p>
+        <button id="button2">下载图片(downLoadImgByUrl)</button>
+      </section>
+      <hr />
+      <section>
+        <p>方法三:downloadByBlob方法(canvas.toBlob): 下载的时候没法压缩图片</p>
+        <button id="button3">下载图片(downloadByBlob)</button>
+      </section>
+    </div>
+    <hr />
+    <h4>下载文本的方法:</h4>
+    <section>
+      <button id="button4">下载文本</button>
+    </section>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three/examples/jsm/"
+        }
+      }
+    </script>
+    <script>
+      // <script type="module">
+      const aaa1 = "ad";
+      let aaa2 = "ed";
+      var aaa3 = "sx";
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { saveAs } from "./module/saveAs.js";
+      import {
+        downLoadImgByUrl,
+        downloadByBlob,
+        downloadTxt,
+      } from "./module/download.js";
+      console.info(" aaa1:", aaa1);
+      console.info(" aaa3:", aaa3);
+      console.info(" THREE:", THREE, Object.keys(THREE));
+
+      document.getElementById("button").onclick = () => {
+        // saveAs("/assets/test.jpeg"); //ok
+
+        saveAs(
+          "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
+        ); //ok
+      };
+      document.getElementById("button2").onclick = () => {
+        // downLoadImgByUrl("/assets/test.jpeg"); //ok
+        downLoadImgByUrl(
+          "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
+        ); //ok
+      };
+      document.getElementById("button3").onclick = () => {
+        // downloadByBlob("/assets/test.jpeg"); //ok
+
+        downloadByBlob(
+          "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
+        ); //ok
+      };
+      document.getElementById("button4").onclick = () => {
+        downloadTxt(
+          "测试",
+          "https://img.bosszhipin.com/beijin/upload/image/20220704/a75e120f323f706ce73149adcdb97228.png"
+        ); // ok
+      };
+    </script>
+  </body>
+</html>

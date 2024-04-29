@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // window.onerror = function (
+      //   errorMessage,
+      //   scriptURI,
+      //   lineNumber,
+      //   columnNumber,
+      //   errorObj
+      // ) {
+      //   alert(111);
+      //   console.log(
+      //     errorMessage,
+      //     scriptURI,
+      //     lineNumber,
+      //     columnNumber,
+      //     errorObj
+      //   );
+      //   return true;
+      // };
+
+      window.addEventListener(
+        "error",
+        (e) => {
+          console.info("31 e>>>>>>:", e);
+          // 防止刷新过后资源依然404导致页面无限刷新， 在router.afterEach里删除
+          if (sessionStorage.staticReload) {
+            return;
+          }
+          let localName = e.target.localName;
+          if (localName === "script" || localName === "link") {
+            // 只刷新一次 用 staticReload 标记一下
+            window.sessionStorage.setItem("staticReload", "1");
+            // reload里一定要加 true
+            window.location.reload(true);
+          }
+          // 这个true一定要加，否则监听不到
+        },
+        true
+      );
+    </script>
+    <link rel="stylesheet" href="aa.css" />
+  </head>
+  <body>
+    toBlob test huazi
+    <canvas id="canvas"></canvas>
+    <input type="file" />
+    <input type="text" />
+    <script type="module" src="./module/canvas.js"></script>
+  </body>
+</html>

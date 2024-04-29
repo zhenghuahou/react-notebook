@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script type="module">
+      import { effect, reactive } from "./module/vue.js"; // 确保从您的 main.ts 文件中导入
+
+      var rawObj = {
+        foo: 1,
+        get bar() {
+          console.info(
+            " this>>>!@:",
+            this,
+            "this === rawObj:",
+            this === rawObj //reactive函数如果只用proxy代理的话,这里this===rawObj为true
+          );
+          return this.foo + "ad";
+        },
+      };
+      const obj = reactive(rawObj);
+
+      window.obj = obj;
+
+      effect(() => {
+        console.log("副作用:", obj.bar);
+      });
+    </script>
+    <script>
+      // const map = new Map();
+      // const weakmap = new WeakMap();
+
+      // (function () {
+      //   const foo = { foo: 1 };
+      //   const bar = { bar: 2 };
+
+      //   map.set(foo, 1);
+      //   weakmap.set(bar, 2);
+      // })();
+
+      // console.log(map);
+      // console.log(weakmap);
+    </script>
+  </body>
+</html>
