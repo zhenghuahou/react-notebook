@@ -212,18 +212,21 @@ window.addEventListener("load", function () {
     this.innerHTML = count++;
   }
 
-  container1.onmousemove = getUserAction;
+  container1 && (container1.onmousemove = getUserAction);
 
   //当鼠标移入的时候，事件立刻执行,每过 1s 会执行一次，如果在 4.2s 停止触发，以后不会再执行事件
-  container2.onmousemove = throttleA(getUserAction, 1000);
+  container2 && (container2.onmousemove = throttleA(getUserAction, 1000));
 
   //当鼠标移入的时候，事件不会立刻执行，晃了 3s 后终于执行了一次，此后每 3s 执行一次，当数字显示为 3 的时候，立刻移出鼠标，相当于大约 9.2s 的时候停止触发，
   //但是依然会在第 12s 的时候执行一次事件。
-  container3.onmousemove = throttleB(getUserAction, 3000);
+  container3 && (container3.onmousemove = throttleB(getUserAction, 3000));
 
   //鼠标移入，事件立刻执行，晃了 3s，事件再一次执行，当数字变成 3 的时候，也就是 6s 后，我们立刻移出鼠标，停止触发事件，9s 的时候，依然会再执行一次事件。
-  container4.onmousemove = throttleC(getUserAction, 3000);
+  container4 && (container4.onmousemove = throttleC(getUserAction, 3000));
 
-  container5.onmousemove = throttle(getUserAction, 3000, { leading: false });
+  container5 &&
+    (container5.onmousemove = throttle(getUserAction, 3000, {
+      leading: false,
+    }));
   // container5.onmousemove = throttle(getUserAction, 3000, { trailing: false });
 });

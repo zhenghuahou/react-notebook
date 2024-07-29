@@ -1,66 +1,71 @@
 import * as React from "react";
 import {
-  Outlet, Link,
+  Outlet,
+  Link,
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
-
-import Basic, { routeConfig } from './pages/basic'
-import ReactPractice, { routeConfig as ReactPracticeRouteConfig } from './pages/react'
-import Performance, { routeConfig as PerformanceRouteConfig } from './pages/react'
-import Engineering, { routeConfig as EngineeringRouteConfig } from './pages/engineering'
-import Program, { routeConfig as ProgramRouteConfig } from './pages/program'
-import Algorithm, { routeConfig as AlgorithmRouteConfig } from './pages/algorithm'
-import Network, { routeConfig as NetworkRouteConfig } from './pages/network'
-
+import Basic, { routeConfig } from "./pages/basic";
+import ReactPractice, {
+  routeConfig as ReactPracticeRouteConfig,
+} from "./pages/react";
+import Performance, {
+  routeConfig as PerformanceRouteConfig,
+} from "./pages/react";
+import Engineering, {
+  routeConfig as EngineeringRouteConfig,
+} from "./pages/engineering";
+import Program, { routeConfig as ProgramRouteConfig } from "./pages/program";
+import Algorithm, {
+  routeConfig as AlgorithmRouteConfig,
+} from "./pages/algorithm";
+import Network, { routeConfig as NetworkRouteConfig } from "./pages/network";
 
 const routerCfg = [
   {
     path: "basic",
     element: <Basic />,
-    title: 'js基础',
+    title: "js基础",
     children: routeConfig,
   },
   {
     path: "programming",
     element: <Program />,
-    title: '编程案例',
+    title: "编程案例",
     children: ProgramRouteConfig,
   },
 
   {
     path: "algorithm",
     element: <Algorithm />,
-    title: '算法',
+    title: "算法",
     children: AlgorithmRouteConfig,
   },
   {
     path: "network",
     element: <Network />,
-    title: '网络相关',
+    title: "网络相关",
     children: NetworkRouteConfig,
   },
   {
     path: "performance",
     element: <Performance />,
-    title: '性能',
-    children: PerformanceRouteConfig
+    title: "性能",
+    children: PerformanceRouteConfig,
   },
   {
     path: "engineering",
     element: <Engineering />,
-    title: '工程化',
-    children: EngineeringRouteConfig
+    title: "工程化",
+    children: EngineeringRouteConfig,
   },
   {
     path: "reactPractice",
     element: <ReactPractice />,
-    title: 'react practice',
-    children: ReactPracticeRouteConfig
+    title: "react practice",
+    children: ReactPracticeRouteConfig,
   },
-
-
 ];
 const router = createBrowserRouter([
   {
@@ -74,8 +79,7 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <div className="app-demo">
-      <RouterProvider router={router}>
-      </RouterProvider>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
@@ -89,11 +93,13 @@ function Layout() {
         <p className="calc-test">calc demo</p>
       </p>
       <nav className="nav">
-        {routerCfg.map(r => {
+        {routerCfg.map((r) => {
           const { path, title } = r;
-          return (<li key={path}>
-            <Link to={path}>{title}</Link>
-          </li>)
+          return (
+            <li key={path}>
+              <Link to={path}>{title}</Link>
+            </li>
+          );
         })}
       </nav>
       <section className="main">
@@ -107,9 +113,9 @@ function NoMatch() {
   return (
     <div className="nomatch">
       <h2>Nothing to see here!</h2>
-      <p>
+      <div>
         <Link to="/">Go to the home page</Link>
-      </p>
+      </div>
     </div>
   );
 }
