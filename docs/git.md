@@ -156,3 +156,5 @@ git log origin/feature/detail
 # git 查看某一条提交记录的日志消息和文本diff
 git show 807eb3e9f7296b6f7612e84fc991d47feee57140
 ```
+
+![alt text](image.png)
